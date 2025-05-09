@@ -55,8 +55,8 @@ function addTask() {
 
   const restartBtn = document.createElement("button");
   restartBtn.textContent = "🔁";
+  restartBtn.classList.add("btn-restart");
   restartBtn.style.display = "none";
-  restartBtn.onclick = () => restartTask(timer, duration, type, card, startBtn, restartBtn);
 
   const deleteBtn = document.createElement("button");
   deleteBtn.textContent = "❌";
@@ -114,26 +114,41 @@ function addTask() {
 
 function restartTask(timerElement, duration, type, card, startBtn, restartBtn) {
   const day = new Date().getDay();
-  if (type === "productive") {
-    stressByDay[day] = (stressByDay[day] || 0) + 1;
-    completedProductiveTasks++;
-    drawStressHeatmap();
-  }
+
+  // 😤 Reiniciar aumenta el estrés
+  stressByDay[day] = (stressByDay[day] || 0) + 1;
+
+  // ✅ Actualiza interfaz
   restartBtn.style.display = "none";
   timerElement.textContent = formatTime(duration);
-  startCountdown(timerElement, startBtn, duration, type, card, restartBtn);
+
+  // 🔁 Comenzar nuevamente
+  startCountdown(timerElement, startBtn, duration, type, card, restartBtn, duration);
+
+  // 📦 Guardar nuevo estado
+  drawStressHeatmap();
+  saveToLocalStorage();
 }
 
-function startCountdown(timerElement, button, duration, type, card, restartBtn = null) {
+function startCountdown(timerElement, button, duration, type, card, restartBtn = null, originalDuration = duration) {
   let totalSeconds = duration;
   const progressBar = card.querySelector(".progress-bar");
-  const originalDuration = duration;
+  const taskId = card.id;
+
   button.disabled = true;
+  card.draggable = false;
+  card.dataset.locked = "true";
   document.getElementById("startSound").play().catch(() => {});
+
+  // Guardar en localStorage con duración y tipo
+  localStorage.setItem(`serie9.timer.${taskId}`, JSON.stringify({
+    startTime: Date.now(),
+    duration: originalDuration,
+    type: type
+  }));
 
   const interval = setInterval(() => {
     timerElement.textContent = formatTime(totalSeconds);
-
     const percentage = ((originalDuration - totalSeconds) / originalDuration) * 100;
     if (progressBar) {
       progressBar.style.width = `${Math.min(100, percentage).toFixed(1)}%`;
@@ -142,9 +157,12 @@ function startCountdown(timerElement, button, duration, type, card, restartBtn =
     totalSeconds--;
 
     if (totalSeconds < 0) {
+      card.draggable = true;
+      delete card.dataset.locked;
       clearInterval(interval);
       timerElement.textContent = "✅";
       document.getElementById("endSound").play().catch(() => {});
+      localStorage.removeItem(`serie9.timer.${taskId}`);
 
       const day = new Date().getDay();
 
@@ -157,8 +175,9 @@ function startCountdown(timerElement, button, duration, type, card, restartBtn =
           alert("Has completado 3 actividades productivas. Tómate una pausa de 9 minutos.");
         }
 
-        const btn = restartBtn || card.querySelector("button:nth-of-type(4)");
+        const btn = restartBtn || card.querySelector(".btn-restart");
         if (btn) btn.style.display = "inline-block";
+
       } else if (type === "pause") {
         completedProductiveTasks = 0;
         pauseCompletedAfterLimit = true;
@@ -170,6 +189,8 @@ function startCountdown(timerElement, button, duration, type, card, restartBtn =
     }
   }, 1000);
 }
+
+
 
 function drawStressHeatmap() {
   const container = document.getElementById("stressHeatmap");
@@ -202,7 +223,13 @@ function allowDrop(event) {
 }
 
 function drag(event) {
-  event.dataTransfer.setData("text", event.target.id);
+  const card = event.target;
+  if (card.dataset.locked === "true") {
+    alert("⏳ Esta tarea está en curso y no puede moverse de semana.");
+    event.preventDefault();
+    return;
+  }
+  event.dataTransfer.setData("text", card.id);
 }
 
 function drop(event) {
@@ -310,6 +337,8 @@ function loadFromLocalStorage() {
     card.id = task.id;
     card.className = "task-card";
     task.classList.forEach(c => card.classList.add(c));
+    card.draggable = true;
+    card.ondragstart = drag;
 
     const label = document.createElement("span");
     label.textContent = task.label;
@@ -317,15 +346,15 @@ function loadFromLocalStorage() {
     const timer = document.createElement("span");
     timer.textContent = "27:00";
     timer.style.marginLeft = "10px";
+    timer.style.fontSize = "0.9rem";
+    timer.style.color = "#555";
 
     const startBtn = document.createElement("button");
     startBtn.textContent = "▶️";
-    startBtn.onclick = () => startCountdown(timer, startBtn, 27 * 60, "productive", card);
 
     const restartBtn = document.createElement("button");
     restartBtn.textContent = "🔁";
     restartBtn.style.display = "none";
-    restartBtn.onclick = () => restartTask(timer, 27 * 60, "productive", card, startBtn, restartBtn);
 
     const noteBtn = document.createElement("button");
     noteBtn.textContent = "💬";
@@ -336,22 +365,70 @@ function loadFromLocalStorage() {
     deleteBtn.onclick = () => {
       if (confirm("¿Deseas eliminar esta tarea?")) {
         if (taskNotes[card.id]) delete taskNotes[card.id];
+        localStorage.removeItem(`serie9.timer.${card.id}`);
         card.remove();
         saveToLocalStorage();
       }
     };
 
-    card.appendChild(label);
-    card.appendChild(timer);
-    card.appendChild(startBtn);
-    card.appendChild(restartBtn);
-    card.appendChild(noteBtn);
-    card.appendChild(deleteBtn);
+    const rightSide = document.createElement("div");
+    rightSide.className = "task-buttons";
+    rightSide.appendChild(startBtn);
+    rightSide.appendChild(noteBtn);
+    rightSide.appendChild(restartBtn);
+    rightSide.appendChild(deleteBtn);
+
+    const leftSide = document.createElement("div");
+    leftSide.style.flexGrow = "1";
+    leftSide.appendChild(label);
+    leftSide.appendChild(timer);
+
+    const header = document.createElement("div");
+    header.style.display = "flex";
+    header.style.justifyContent = "space-between";
+    header.style.alignItems = "flex-start";
+    header.appendChild(leftSide);
+    header.appendChild(rightSide);
+
+    card.appendChild(header);
+
+    // 📊 Barra de progreso
+    const progressWrapper = document.createElement("div");
+    progressWrapper.className = "progress";
+    const progressBar = document.createElement("div");
+    progressBar.className = "progress-bar";
+    progressWrapper.appendChild(progressBar);
+    card.appendChild(progressWrapper);
 
     const parent = document.getElementById(task.parentId);
     if (parent) parent.appendChild(card);
+
+    // ⏳ Revisar si hay un temporizador activo
+    const timerData = JSON.parse(localStorage.getItem(`serie9.timer.${card.id}`));
+    if (timerData) {
+      const { startTime, duration, type } = timerData;
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      const remaining = duration - elapsed;
+
+      if (remaining > 0) {
+        startCountdown(timer, startBtn, remaining, type || "productive", card, restartBtn, duration);
+      } else {
+        timer.textContent = "✅";
+        progressBar.style.width = "100%";
+        localStorage.removeItem(`serie9.timer.${card.id}`);
+      }
+    } else {
+      // Tipo por defecto
+      const isPause = card.classList.contains("task-pause");
+      const defaultDuration = isPause ? 9 * 60 : 27 * 60;
+      const type = isPause ? "pause" : "productive";
+      startBtn.onclick = () => startCountdown(timer, startBtn, defaultDuration, type, card, restartBtn, defaultDuration);
+      restartBtn.onclick = () => restartTask(timer, defaultDuration, type, card, startBtn, restartBtn);
+    }
   }
 }
+
+
 
 function openModal() {
   document.getElementById("taskInput").value = "";
