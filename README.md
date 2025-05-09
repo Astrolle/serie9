@@ -93,5 +93,3 @@ Gracias:
 <a href="https://github.com/Astrolle/serie9/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=Astrolle/serie9" />
 </a>
-
-Made with [contrib.rocks](https://contrib.rocks).
