@@ -4,9 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Serie9: Tiempos para Crear y Detenerse</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
     <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#000000" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -16,26 +18,31 @@
     <div class="loading-message">Diseñado por humanos. Ejecutado por IA.</div>
 </div>
 
-<div class="app">
-    <h1>Serie9: Tiempos para Crear y Detenerse</h1>
+<header class="d-flex align-items-center px-3 py-2" style="background-color: #0052CC; color: white;">
+    <div class="d-flex align-items-center">
+        <div style="font-size: 1.8rem; font-weight: bold; margin-right: 12px;">∞∙9</div>
+        <h1 class="h5 mb-0"> Tiempos para Crear y Detenerse</h1>
+    </div>
+</header>
 
+<main class="app container-fluid mt-4">
     <!-- 🌀 Termómetro de ritmo interior -->
-    <div class="heatmap-section">
+    <div class="heatmap-section mb-4">
         <h3>Termómetro de ritmo interior</h3>
-        <canvas id="stressHeatmap" width="600" height="100"></canvas>
+        <div id="stressHeatmap" class="heatmap-grid"></div>
+
     </div>
 
     <!-- 📅 Ciclos de intención -->
-    <div id="kanbanBoard" class="kanban-board">
-        <!-- 🕰 Ideas que aguardan su momento -->
-        <div class="column" id="waitingColumn" ondragover="allowDrop(event)" ondrop="drop(event)">
+    <div id="kanbanBoard" class="kanban-board row">
+        <div class="column col-md-3" id="waitingColumn" ondragover="allowDrop(event)" ondrop="drop(event)">
             <h3>Ideas que aguardan su momento</h3>
             <label for="limitSelector" class="label-small">¿Cuántos latidos antes de respirar?</label>
-            <input type="number" id="limitSelector" min="1" max="10" value="4" />
+            <input type="number" id="limitSelector" min="1" max="10" value="3" />
         </div>
-        <!-- Columnas semanales se generan desde JS -->
+        <!-- Columnas semanales desde JS -->
     </div>
-</div>
+</main>
 
 <!-- ➕ Botón flotante para propósito -->
 <button class="fab" onclick="openModal()">＋</button>
@@ -45,26 +52,22 @@
     <div class="modal-content">
         <span class="close" onclick="closeModal()">×</span>
         <h2>Anotar un propósito</h2>
-
-        <input type="text" id="taskInput" placeholder="¿Qué quieres enfocar o pausar?" />
-
-        <select id="taskType" onchange="toggleSubcategory()">
+        <input type="text" id="taskInput" class="form-control" placeholder="¿Qué quieres enfocar o pausar?" />
+        <select id="taskType" class="form-select" onchange="toggleSubcategory()">
             <option value="productive">Foco total – 27 minutos contigo</option>
             <option value="pause">Pausa sagrada – 9 minutos de reconexión</option>
         </select>
-
         <div id="pauseOptions" style="display: none">
             <label for="pauseType">Sugerencias de pausa:</label>
-            <select id="pauseType">
+            <select id="pauseType" class="form-select">
                 <option value="Pensar">Pensar en silencio</option>
                 <option value="Leer">Leer lento</option>
                 <option value="Respirar">Respirar con intención</option>
                 <option value="Meditar">Meditar y soltar</option>
             </select>
-            <input type="text" id="customPauseInput" placeholder="O define tu forma de pausar..." />
+            <input type="text" id="customPauseInput" class="form-control mt-2" placeholder="O define tu forma de pausar..." />
         </div>
-
-        <button onclick="addTask(); closeModal()">Guardar propósito</button>
+        <button class="btn btn-primary mt-3" onclick="addTask(); closeModal()">Guardar propósito</button>
     </div>
 </div>
 
@@ -82,30 +85,18 @@
         <span id="notesSidebarTitle">Mis notas de enfoque</span>
         <button onclick="closeNotes()">✕</button>
     </div>
-
-    <!-- Solo se muestra en modo individual -->
     <textarea id="notesTextarea" style="display: none" placeholder="Escribe tus ideas…"></textarea>
     <button id="saveNoteBtn" style="display: none" onclick="saveNote()">Guardar nota</button>
-
-    <!-- Modo solo lectura para el navbar -->
     <div id="notesList" style="display: flex; flex-direction: column; gap: 12px;"></div>
 </div>
 
+<!-- Footer -->
 <footer class="serie9-disclaimer">
     <p>
-        Este proyecto fue <strong>diseñado por humanos</strong> pero <strong>creado usando inteligencia artificial</strong>. Todo el contenido, código y diseño de esta plataforma está disponible bajo una licencia abierta y editable por cualquier persona —ya sea humana o artificial— siempre que respete los principios de claridad, calma y contribución.
+        Este proyecto fue <strong>diseñado por humanos</strong> pero <strong>creado usando inteligencia artificial</strong>. Todo el contenido, código y diseño de esta plataforma está disponible bajo una licencia abierta y editable por cualquier persona.
     </p>
     <p>
-        Aunque este proyecto es abierto, su desarrollo y evolución está alojado bajo los repositorios de <a href="https://astrolle.com" target="_blank">astrolle.com</a>.
-    </p>
-    <p>
-        El propósito de <strong>serie9.club</strong> es simple pero esencial: crear una herramienta para honrar el tiempo. Queremos invitar a las personas a detenerse, a respirar, a reconectarse con su propósito y ritmo natural. Esta aplicación está pensada como una guía silenciosa para recordarte que el foco también es descanso, y que en un mundo que acelera, detenerse es una revolución personal.
-    </p>
-    <p>
-        Inspirado por los principios del número 9, este espacio digital busca fomentar la productividad con consciencia, la pausa con intención y el ritmo con significado.
-    </p>
-    <p style="font-size: 0.85rem; color: #888; margin-top: 20px;">
-        Serie9 está disponible bajo la Licencia Abierta ∞∙9, basada en los principios de libre adaptación, uso no comercial preferente, atribución creativa y evolución tecnológica compartida.
+        El propósito de <strong>serie9.club</strong> es simple pero esencial: honrar el tiempo. Esta app es una guía silenciosa para recordarte que el foco también es descanso.
     </p>
 </footer>
 
@@ -115,14 +106,13 @@
         <span class="close" onclick="closeRhythmModal()">×</span>
         <h2>Todo está bien</h2>
         <p>Respira por:</p>
-        <div id="rhythmTimer" style="font-size: 2rem; font-weight: bold;">09:00</div>
+        <div id="rhythmTimer" class="fs-1 fw-bold">09:00</div>
     </div>
 </div>
 
-
-
-
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="script.js"></script>
+<audio id="startSound" src="sounds/start-sound.mp3" preload="auto"></audio>
+<audio id="endSound" src="sounds/end-sound.mp3" preload="auto"></audio>
 </body>
 </html>

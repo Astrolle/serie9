@@ -45,8 +45,10 @@ function addTask() {
 
   const timer = document.createElement("span");
   timer.textContent = formatTime(duration);
-  timer.style.marginLeft = "10px";
+  timer.style.fontSize = "0.9rem";
+  timer.style.color = "#555";
 
+  // Botones
   const startBtn = document.createElement("button");
   startBtn.textContent = "▶️";
   startBtn.onclick = () => startCountdown(timer, startBtn, duration, type, card);
@@ -66,20 +68,43 @@ function addTask() {
     }
   };
 
-  card.appendChild(label);
-  card.appendChild(timer);
-  card.appendChild(startBtn);
+  const header = document.createElement("div");
+  header.style.display = "flex";
+  header.style.justifyContent = "space-between";
+  header.style.alignItems = "flex-start";
+
+  const leftSide = document.createElement("div");
+  leftSide.style.flexGrow = "1";
+  leftSide.appendChild(label);
+  leftSide.appendChild(timer);
+
+  const rightSide = document.createElement("div");
+  rightSide.className = "task-buttons";
+  rightSide.appendChild(startBtn);
 
   if (type === "productive") {
     const noteBtn = document.createElement("button");
     noteBtn.textContent = "💬";
     noteBtn.onclick = () => openNotes(card.id);
-    card.appendChild(noteBtn);
-    card.appendChild(restartBtn);
+    rightSide.appendChild(noteBtn);
+    rightSide.appendChild(restartBtn);
     openNotes(card.id);
   }
 
-  card.appendChild(deleteBtn);
+  rightSide.appendChild(deleteBtn);
+
+  header.appendChild(leftSide);
+  header.appendChild(rightSide);
+  card.appendChild(header);
+
+  // Barra de progreso
+  const progressWrapper = document.createElement("div");
+  progressWrapper.className = "progress";
+  const progressBar = document.createElement("div");
+  progressBar.className = "progress-bar";
+  progressWrapper.appendChild(progressBar);
+  card.appendChild(progressWrapper);
+
   document.getElementById("waitingColumn").appendChild(card);
   saveToLocalStorage();
 
@@ -101,21 +126,37 @@ function restartTask(timerElement, duration, type, card, startBtn, restartBtn) {
 
 function startCountdown(timerElement, button, duration, type, card, restartBtn = null) {
   let totalSeconds = duration;
+  const progressBar = card.querySelector(".progress-bar");
+  const originalDuration = duration;
   button.disabled = true;
+  document.getElementById("startSound").play().catch(() => {});
 
   const interval = setInterval(() => {
     timerElement.textContent = formatTime(totalSeconds);
+
+    const percentage = ((originalDuration - totalSeconds) / originalDuration) * 100;
+    if (progressBar) {
+      progressBar.style.width = `${Math.min(100, percentage).toFixed(1)}%`;
+    }
+
     totalSeconds--;
 
     if (totalSeconds < 0) {
       clearInterval(interval);
       timerElement.textContent = "✅";
+      document.getElementById("endSound").play().catch(() => {});
 
       const day = new Date().getDay();
+
       if (type === "productive") {
         completedProductiveTasks++;
         pauseCompletedAfterLimit = false;
         stressByDay[day] = (stressByDay[day] || 0) + 1;
+
+        if (completedProductiveTasks % 3 === 0) {
+          alert("Has completado 3 actividades productivas. Tómate una pausa de 9 minutos.");
+        }
+
         const btn = restartBtn || card.querySelector("button:nth-of-type(4)");
         if (btn) btn.style.display = "inline-block";
       } else if (type === "pause") {
@@ -131,24 +172,18 @@ function startCountdown(timerElement, button, duration, type, card, restartBtn =
 }
 
 function drawStressHeatmap() {
-  const canvas = document.getElementById("stressHeatmap");
-  const ctx = canvas.getContext("2d");
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const container = document.getElementById("stressHeatmap");
+  container.innerHTML = "";
 
-  const days = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
-  const maxStress = 4;
-  const boxWidth = canvas.width / 7;
-  const boxHeight = canvas.height;
+  const levels = [0, 1, 2, 3, 4]; // 0 = sin estrés, 4 = alto estrés
 
   for (let i = 0; i < 7; i++) {
-    const stress = Math.min(stressByDay[i] || 0, maxStress);
-    const color = getStressColor(stress);
-    ctx.fillStyle = color;
-    ctx.fillRect(i * boxWidth, 0, boxWidth, boxHeight);
-    ctx.fillStyle = "white";
-    ctx.font = "12px sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText(days[i], i * boxWidth + boxWidth / 2, 15);
+    const value = stressByDay[i] || 0;
+    const level = Math.min(4, value);
+    const cell = document.createElement("div");
+    cell.className = "heatmap-cell";
+    cell.dataset.level = level;
+    container.appendChild(cell);
   }
 }
 
@@ -340,24 +375,26 @@ window.onload = () => {
 };
 
 function createWeekColumns() {
-  const kanban = document.getElementById("kanbanBoard");
   const today = new Date();
   const currentWeek = Math.ceil((((today - new Date(today.getFullYear(), 0, 1)) / 86400000) + today.getDay() + 1) / 7);
-  const year = today.getFullYear();
-  const weeksToShow = [-1, 0, 1, 2];
-  weeksToShow.forEach(offset => {
-    const weekNum = currentWeek + offset;
+  const titles = ["Retrasado", "Por Terminar", "Por hacer", "Futuro"];
+  const ids = [currentWeek - 1, currentWeek, currentWeek + 1, currentWeek + 2];
+  const kanban = document.getElementById("kanbanBoard");
+
+  ids.forEach((weekNum, i) => {
     const column = document.createElement("div");
-    column.className = "column";
+    column.className = "column col-md-3";
     column.id = `week-${weekNum}`;
     column.ondragover = allowDrop;
     column.ondrop = drop;
+
     const title = document.createElement("h3");
-    title.innerText = `Semana ${weekNum}`;
+    title.innerText = `${titles[i]} (Semana ${weekNum})`;
+
     column.appendChild(title);
     kanban.appendChild(column);
   });
-};
+}
 
 // 🛠️ Registro de Service Worker para PWA
 if ('serviceWorker' in navigator) {

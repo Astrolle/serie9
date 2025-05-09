@@ -1,42 +1,46 @@
-/* 🌌 Estética general Serie9 */
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #f9fafa;
+    font-family: 'Inter', 'Helvetica Neue', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #f4f5f7;
     color: #2a2a2a;
     margin: 0;
     padding-bottom: 70px;
     line-height: 1.6;
+    font-size: 15px;
 }
 
 .app {
-    max-width: 1280px;
-    margin: 0 auto;
+    width: 100%;
     padding: 24px;
 }
 
-h1 {
-    font-size: 1.8rem;
+h1, h2, h3 {
+    font-family: 'Inter', sans-serif;
     font-weight: 600;
-    margin-bottom: 24px;
-    text-align: center;
-    color: #1a1a1a;
 }
 
-h2, h3 {
-    font-weight: 500;
-    color: #333;
+h1 {
+    font-size: 1.75rem;
+}
+
+h2 {
+    font-size: 1.4rem;
+}
+
+h3 {
+    font-size: 1.1rem;
 }
 
 /* 🔳 Inputs & Selects */
-input, select {
-    padding: 10px 14px;
-    font-size: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    background-color: #fff;
-    outline: none;
-    width: 100%;
-    box-sizing: border-box;
+
+button {
+    font-family: inherit;
+    font-size: 0.9rem;
+}
+
+input, select, textarea {
+    font-family: inherit;
+    font-size: 0.95rem;
+    border-radius: 6px;
 }
 
 input[type="number"] {
@@ -44,84 +48,98 @@ input[type="number"] {
 }
 
 .label-small {
-    font-size: 0.9rem;
-    margin-bottom: 4px;
+    font-size: 0.875rem;
+    color: #6b778c;
     display: block;
-    color: #666;
+    margin-bottom: 4px;
 }
 
-/* 🗂 Kanban/Lista */
+/* 🗂 Kanban */
 .kanban-board {
     display: flex;
     gap: 20px;
-    flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    width: 100%;
 }
 
-/* 📦 Columnas */
+/* 📦 Columnas estilo Jira */
 .column {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 14px;
+    background-color: #ebecf0;
+    padding: 16px;
+    border-radius: 8px;
     min-width: 260px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-    flex: 1 1 300px;
-    transition: box-shadow 0.3s ease;
+    flex: 1;
+    box-shadow: inset 0 0 0 1px #dfe1e6;
+    display: flex;
+    flex-direction: column;
 }
 
-.column h3 {
-    font-size: 1.05rem;
-    margin-bottom: 14px;
-    color: #4a4a4a;
-}
-
-/* 🎯 Columna de ideas en espera */
 #waitingColumn {
-    background-color: #f3f6f8;
-    border: 1px dashed #ccc;
+    background-color: #f6f8fa;
+    border: 1px dashed #c1c7d0;
 }
 
 /* 🧩 Tarjetas */
 .task-card {
-    margin-bottom: 14px;
-    padding: 16px;
-    border-radius: 14px;
-    background-color: #eceff1;
-    border-left: 6px solid #9ca3af;
+    background-color: #fff;
+    border-left: 4px solid #dfe1e6;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 2px rgba(9, 30, 66, 0.1);
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px;
+    flex-direction: column;
+    gap: 8px;
     font-size: 0.95rem;
-    font-weight: 500;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+}
+
+.task-card .task-info {
+    margin-top: 8px;
+}
+
+.task-buttons button {
+    background-color: transparent;
+    border: none;
+    color: #6b778c;
+    font-size: 0.8rem;
+    padding: 2px 6px;
+    margin-left: 4px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.task-buttons button:hover {
+    color: #172b4d;
 }
 
 .task-card span {
-    flex-grow: 1;
+    display: block;
+    font-weight: 500;
+    margin-bottom: 6px;
 }
 
-/* Botones dentro de tarjeta */
-.task-card button {
-    padding: 6px 12px;
-    font-size: 0.85rem;
-    background-color: #444;
-    color: white;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+.task-card .progress {
+    height: 6px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
 }
 
-.task-card button:hover {
-    background-color: #222;
+.task-card .progress-bar {
+    height: 6px;
+    background-color: #4caf50;
+    width: 0%;
+    transition: width 0.5s ease;
 }
 
-/* Colores suaves por tipo de pausa */
-.task-pause.read { background-color: #dbeeff; border-left-color: #66b3ff; }
-.task-pause.breathe { background-color: #dbf4ee; border-left-color: #39b49a; }
-.task-pause.think { background-color: #f5e8fd; border-left-color: #af7cc2; }
-.task-pause.meditate { background-color: #fff1d6; border-left-color: #ffb347; }
+/* Colores por pausa */
+.task-pause.read { border-left-color: #4c9aff; background-color: #deebff; }
+.task-pause.breathe { border-left-color: #00b8d9; background-color: #e6fcff; }
+.task-pause.think { border-left-color: #6554c0; background-color: #eae6ff; }
+.task-pause.meditate { border-left-color: #ffab00; background-color: #fff7e6; }
 
 /* 📊 Heatmap */
 #stressHeatmap {
@@ -129,9 +147,9 @@ input[type="number"] {
     width: 100%;
     max-width: 600px;
     height: 100px;
-    border-radius: 10px;
+    border-radius: 8px;
     background-color: #fff;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 /* ➕ FAB */
@@ -185,26 +203,6 @@ input[type="number"] {
     position: relative;
 }
 
-.modal-content h2 {
-    margin-top: 0;
-    font-size: 1.3rem;
-    color: #222;
-}
-
-.modal-content button {
-    background-color: #007bff;
-    color: white;
-    font-weight: bold;
-    padding: 12px;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-}
-
-.modal-content button:hover {
-    background-color: #0056b3;
-}
-
 .close {
     font-size: 1.5rem;
     color: #888;
@@ -214,15 +212,15 @@ input[type="number"] {
     top: 15px;
 }
 
-/* 📱 Navegación inferior tipo app */
+/* 📱 Navegación inferior */
 .bottom-nav {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     height: 60px;
-    background-color: #fff;
-    border-top: 1px solid #ddd;
+    background-color: #f8f9fa;
+    border-top: 1px solid #ccc;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -233,7 +231,7 @@ input[type="number"] {
     background: none;
     border: none;
     font-size: 0.8rem;
-    color: #666;
+    color: #6c757d;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -245,77 +243,7 @@ input[type="number"] {
     color: #007bff;
 }
 
-.nav-btn span {
-    font-size: 0.75rem;
-}
-
-/* 📱 Responsive Serie9 */
-@media screen and (max-width: 768px) {
-    .kanban-board {
-        flex-direction: column;
-        gap: 16px;
-    }
-
-    .column {
-        width: 100%;
-    }
-
-    h1 {
-        font-size: 1.4rem;
-        text-align: center;
-    }
-}
-
-
-
-/* ⏳ Serie9 - Pantalla de carga */
-.loading-screen {
-    position: fixed;
-    inset: 0;
-    background-color: #f9fafa;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    font-family: 'Segoe UI', sans-serif;
-    transition: opacity 0.4s ease, visibility 0.4s ease;
-}
-
-.loading-logo {
-    font-size: 3.5rem;
-    font-weight: bold;
-    color: #1a1a1a;
-    animation: pulse 2.4s infinite ease-in-out;
-}
-
-.loading-message {
-    font-size: 1rem;
-    color: #666;
-    letter-spacing: 0.5px;
-    margin-top: 10px;
-}
-
-.loading-screen {
-    /* ... */
-    transition: opacity 1.5s ease-in-out, visibility 1.5s ease-in-out;
-}
-
-
-
-/* 💓 Latido Serie9 */
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.05);
-        opacity: 0.85;
-    }
-}
-
-/* 📝 Sidebar de notas Serie9 */
+/* Sidebar Notas */
 .notes-sidebar {
     position: fixed;
     top: 0;
@@ -331,6 +259,10 @@ input[type="number"] {
     transform: translateX(100%);
     transition: transform 0.4s ease;
     z-index: 1200;
+}
+
+.notes-sidebar.show {
+    transform: translateX(0);
 }
 
 .notes-sidebar textarea {
@@ -354,38 +286,12 @@ input[type="number"] {
     cursor: pointer;
 }
 
-.notes-sidebar button:hover {
-    background-color: #0056b3;
-}
-
-.notes-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: bold;
-    color: #333;
-}
-
-.notes-sidebar.show {
-    transform: translateX(0);
-}
-
-.notes-sidebar.hidden {
-    transform: translateX(100%);
-}
-
-#rhythmTimer {
-    font-size: 100px;
-}
-
-
 footer.serie9-disclaimer {
-    background-color: #f9fafa;
+    background-color: #f4f5f7;
     padding: 40px 20px;
-    font-size: 0.60rem;
+    font-size: 0.75rem;
     color: #333;
-    line-height: 1.6;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #ccc;
     max-width: 960px;
     margin: 40px auto 0 auto;
 }
@@ -398,3 +304,66 @@ footer.serie9-disclaimer a {
 footer.serie9-disclaimer a:hover {
     text-decoration: underline;
 }
+
+/* Loading */
+.loading-screen {
+    position: fixed;
+    inset: 0;
+    background-color: #f4f5f7;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    font-family: 'Segoe UI', sans-serif;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.loading-logo {
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: #1a1a1a;
+    animation: pulse 2.4s infinite ease-in-out;
+}
+
+.loading-message {
+    font-size: 1rem;
+    color: #666;
+    margin-top: 10px;
+}
+
+.heatmap-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    width: 100%;
+    max-width: 600px;
+    margin: 12px 0;
+}
+
+.heatmap-cell {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 4px;
+    background-color: #ebedf0;
+    transition: background-color 0.3s ease;
+}
+
+.heatmap-cell[data-level="1"] { background-color: #c6e48b; }
+.heatmap-cell[data-level="2"] { background-color: #7bc96f; }
+.heatmap-cell[data-level="3"] { background-color: #239a3b; }
+.heatmap-cell[data-level="4"] { background-color: #196127; }
+
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.85;
+    }
+}
+
+
