@@ -1,9 +1,9 @@
-
+const todayStr = new Date().toISOString().slice(0, 10);
 let completedProductiveTasks = 0;
 let pauseCompletedAfterLimit = true;
 let currentNoteTaskId = null;
 const taskNotes = {};
-const stressByDay = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
+const stressByDate = {}; // Clave: YYYY-MM-DD
 
 function formatTime(totalSeconds) {
   const minutes = Math.floor(totalSeconds / 60);
@@ -116,7 +116,7 @@ function restartTask(timerElement, duration, type, card, startBtn, restartBtn) {
   const day = new Date().getDay();
 
   // 😤 Reiniciar aumenta el estrés
-  stressByDay[day] = (stressByDay[day] || 0) + 1;
+  stressByDate[todayStr] = (stressByDate[todayStr] || 0) + 1;
 
   // ✅ Actualiza interfaz
   restartBtn.style.display = "none";
@@ -169,7 +169,7 @@ function startCountdown(timerElement, button, duration, type, card, restartBtn =
       if (type === "productive") {
         completedProductiveTasks++;
         pauseCompletedAfterLimit = false;
-        stressByDay[day] = (stressByDay[day] || 0) + 1;
+        stressByDate[todayStr] = (stressByDate[todayStr] || 0) + 1;
 
         if (completedProductiveTasks % 3 === 0) {
           alert("Has completado 3 actividades productivas. Tómate una pausa de 9 minutos.");
@@ -181,7 +181,7 @@ function startCountdown(timerElement, button, duration, type, card, restartBtn =
       } else if (type === "pause") {
         completedProductiveTasks = 0;
         pauseCompletedAfterLimit = true;
-        stressByDay[day] = Math.max((stressByDay[day] || 0) - 1, 0);
+        stressByDate[todayStr] = Math.max((stressByDate[todayStr] || 0) - 1, 0);
       }
 
       drawStressHeatmap();
@@ -199,7 +199,7 @@ function drawStressHeatmap() {
   const levels = [0, 1, 2, 3, 4]; // 0 = sin estrés, 4 = alto estrés
 
   for (let i = 0; i < 7; i++) {
-    const value = stressByDay[i] || 0;
+    const value = stressByDate[i] || 0;
     const level = Math.min(4, value);
     const cell = document.createElement("div");
     cell.className = "heatmap-cell";
@@ -321,16 +321,16 @@ function saveToLocalStorage() {
 
   localStorage.setItem("serie9.tasks", JSON.stringify(allTasks));
   localStorage.setItem("serie9.notes", JSON.stringify(taskNotes));
-  localStorage.setItem("serie9.stress", JSON.stringify(stressByDay));
+  localStorage.setItem("serie9.stress", JSON.stringify(stressByDate));
 }
 
 function loadFromLocalStorage() {
   const tasks = JSON.parse(localStorage.getItem("serie9.tasks") || "[]");
   const notes = JSON.parse(localStorage.getItem("serie9.notes") || "{}");
   const stress = JSON.parse(localStorage.getItem("serie9.stress") || "{}");
+  Object.assign(stressByDate, stress);
 
   Object.assign(taskNotes, notes);
-  Object.assign(stressByDay, stress);
 
   for (const task of tasks) {
     const card = document.createElement("div");
@@ -472,6 +472,90 @@ function createWeekColumns() {
     kanban.appendChild(column);
   });
 }
+
+
+function openManifestSidebar() {
+  const sidebar = document.getElementById("manifestSidebar");
+  sidebar.classList.remove("hidden");
+  sidebar.classList.add("show");
+}
+
+function closeManifestSidebar() {
+  const sidebar = document.getElementById("manifestSidebar");
+  sidebar.classList.remove("show");
+  sidebar.classList.add("hidden");
+}
+
+function openCalendarHeatmap() {
+  document.getElementById("calendarHeatmapModal").style.display = "block";
+  drawCalendarHeatmap();
+}
+
+function closeCalendarHeatmap() {
+  document.getElementById("calendarHeatmapModal").style.display = "none";
+}
+
+function drawCalendarHeatmap() {
+  const container = document.getElementById("calendarHeatmapGrid");
+  const monthTitle = document.getElementById("calendarMonthTitle");
+  container.innerHTML = "";
+
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth(); // 0 = enero
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const startDay = new Date(year, month, 1).getDay(); // Día de la semana en que empieza
+
+  const stress = JSON.parse(localStorage.getItem("serie9.stress") || "{}");
+  const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+  monthTitle.textContent = `${monthNames[month]} ${year}`;
+
+  let maxStress = -1;
+  let maxDate = "";
+
+  Object.keys(stress).forEach(date => {
+    if (stress[date] > maxStress) {
+      maxStress = stress[date];
+      maxDate = date;
+    }
+  });
+
+  // Celdas vacías para alinear el primer día
+  for (let i = 0; i < startDay; i++) {
+    const empty = document.createElement("div");
+    empty.className = "heatmap-cell";
+    empty.style.visibility = "hidden";
+    container.appendChild(empty);
+  }
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    const dateObj = new Date(year, month, day);
+    const dateStr = dateObj.toISOString().slice(0, 10);
+    const stressLevel = Math.min(4, stress[dateStr] || 0);
+
+    const cell = document.createElement("div");
+    cell.className = "heatmap-cell";
+    cell.dataset.level = stressLevel;
+    cell.title = `${dateStr} - Estrés: ${stress[dateStr] || 0}`;
+
+    if (dateStr === maxDate) {
+      cell.style.border = "2px solid red";
+    }
+
+    const dayNumber = document.createElement("div");
+    dayNumber.textContent = day;
+    dayNumber.style.fontSize = "0.75rem";
+    dayNumber.style.color = "#333";
+
+    cell.appendChild(dayNumber);
+    container.appendChild(cell);
+  }
+}
+
+
+
 
 // 🛠️ Registro de Service Worker para PWA
 if ('serviceWorker' in navigator) {

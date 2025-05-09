@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Serie9",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Una app para enfocarte, detenerte y respirar.",
   "icons": {
     "192": "icon-192.png",

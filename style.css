@@ -237,12 +237,23 @@ input[type="number"] {
 }
 
 .close {
-    font-size: 1.5rem;
-    color: #888;
+    font-size: 1.1rem;
+    color: #999;
     cursor: pointer;
     position: absolute;
-    right: 20px;
-    top: 15px;
+    right: 14px;
+    top: 10px;
+    background: none;
+    border: none;
+    padding: 4px 8px;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.close:hover {
+    opacity: 1;
+    color: #555;
 }
 
 /* 📱 Navegación inferior */
@@ -308,7 +319,9 @@ input[type="number"] {
     min-height: 200px;
 }
 
-.notes-sidebar button {
+
+
+.notes-sidebar button:not(.close) {
     align-self: flex-end;
     padding: 10px 16px;
     font-size: 0.9rem;
@@ -317,10 +330,6 @@ input[type="number"] {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-}
-
-.notes-sidebar button:hover {
-    background-color: #006e52;
 }
 
 /* 📎 Footer - Estilo Shopify */
@@ -392,6 +401,12 @@ footer.serie9-disclaimer a:hover {
 .heatmap-cell[data-level="2"] { background-color: #7bc96f; }
 .heatmap-cell[data-level="3"] { background-color: #239a3b; }
 .heatmap-cell[data-level="4"] { background-color: #196127; }
+
+.heatmap-cell > div {
+    text-align: right;
+    padding: 2px;
+    font-weight: bold;
+}
 
 @keyframes pulse {
     0%, 100% {
