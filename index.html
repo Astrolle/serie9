@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Serie9: Tiempos para Crear y Detenerse</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#000000" />
+</head>
+<body>
+
+<!-- 🌐 Loading Serie9 -->
+<div id="loadingScreen" class="loading-screen">
+    <div class="loading-logo">∞∙9</div>
+    <div class="loading-message">Diseñado por humanos. Ejecutado por IA.</div>
+</div>
+
+<div class="app">
+    <h1>Serie9: Tiempos para Crear y Detenerse</h1>
+
+    <!-- 🌀 Termómetro de ritmo interior -->
+    <div class="heatmap-section">
+        <h3>Termómetro de ritmo interior</h3>
+        <canvas id="stressHeatmap" width="600" height="100"></canvas>
+    </div>
+
+    <!-- 📅 Ciclos de intención -->
+    <div id="kanbanBoard" class="kanban-board">
+        <!-- 🕰 Ideas que aguardan su momento -->
+        <div class="column" id="waitingColumn" ondragover="allowDrop(event)" ondrop="drop(event)">
+            <h3>Ideas que aguardan su momento</h3>
+            <label for="limitSelector" class="label-small">¿Cuántos latidos antes de respirar?</label>
+            <input type="number" id="limitSelector" min="1" max="10" value="4" />
+        </div>
+        <!-- Columnas semanales se generan desde JS -->
+    </div>
+</div>
+
+<!-- ➕ Botón flotante para propósito -->
+<button class="fab" onclick="openModal()">＋</button>
+
+<!-- 📝 Modal para anotar un propósito -->
+<div id="taskModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">×</span>
+        <h2>Anotar un propósito</h2>
+
+        <input type="text" id="taskInput" placeholder="¿Qué quieres enfocar o pausar?" />
+
+        <select id="taskType" onchange="toggleSubcategory()">
+            <option value="productive">Foco total – 27 minutos contigo</option>
+            <option value="pause">Pausa sagrada – 9 minutos de reconexión</option>
+        </select>
+
+        <div id="pauseOptions" style="display: none">
+            <label for="pauseType">Sugerencias de pausa:</label>
+            <select id="pauseType">
+                <option value="Pensar">Pensar en silencio</option>
+                <option value="Leer">Leer lento</option>
+                <option value="Respirar">Respirar con intención</option>
+                <option value="Meditar">Meditar y soltar</option>
+            </select>
+            <input type="text" id="customPauseInput" placeholder="O define tu forma de pausar..." />
+        </div>
+
+        <button onclick="addTask(); closeModal()">Guardar propósito</button>
+    </div>
+</div>
+
+<!-- 📱 Navegación inferior estilo app -->
+<nav class="bottom-nav">
+    <button class="nav-btn active">📅<span>Agenda</span></button>
+    <button class="nav-btn" onclick="openRhythmModal()">🌀<span>Ritmo</span></button>
+    <button class="nav-btn" onclick="showAllNotes()">📝<span>Notas</span></button>
+    <button class="nav-btn">☰<span>Más</span></button>
+</nav>
+
+<!-- 📝 Sidebar de Notas Productivas -->
+<div id="notesSidebar" class="notes-sidebar hidden">
+    <div class="notes-header">
+        <span id="notesSidebarTitle">Mis notas de enfoque</span>
+        <button onclick="closeNotes()">✕</button>
+    </div>
+
+    <!-- Solo se muestra en modo individual -->
+    <textarea id="notesTextarea" style="display: none" placeholder="Escribe tus ideas…"></textarea>
+    <button id="saveNoteBtn" style="display: none" onclick="saveNote()">Guardar nota</button>
+
+    <!-- Modo solo lectura para el navbar -->
+    <div id="notesList" style="display: flex; flex-direction: column; gap: 12px;"></div>
+</div>
+
+<footer class="serie9-disclaimer">
+    <p>
+        Este proyecto fue <strong>diseñado por humanos</strong> pero <strong>creado usando inteligencia artificial</strong>. Todo el contenido, código y diseño de esta plataforma está disponible bajo una licencia abierta y editable por cualquier persona —ya sea humana o artificial— siempre que respete los principios de claridad, calma y contribución.
+    </p>
+    <p>
+        Aunque este proyecto es abierto, su desarrollo y evolución está alojado bajo los repositorios de <a href="https://astrolle.com" target="_blank">astrolle.com</a>.
+    </p>
+    <p>
+        El propósito de <strong>serie9.club</strong> es simple pero esencial: crear una herramienta para honrar el tiempo. Queremos invitar a las personas a detenerse, a respirar, a reconectarse con su propósito y ritmo natural. Esta aplicación está pensada como una guía silenciosa para recordarte que el foco también es descanso, y que en un mundo que acelera, detenerse es una revolución personal.
+    </p>
+    <p>
+        Inspirado por los principios del número 9, este espacio digital busca fomentar la productividad con consciencia, la pausa con intención y el ritmo con significado.
+    </p>
+    <p style="font-size: 0.85rem; color: #888; margin-top: 20px;">
+        Serie9 está disponible bajo la Licencia Abierta ∞∙9, basada en los principios de libre adaptación, uso no comercial preferente, atribución creativa y evolución tecnológica compartida.
+    </p>
+</footer>
+
+<!-- 🌬️ Modal Ritmo - Respiración Serie9 -->
+<div id="rhythmModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeRhythmModal()">×</span>
+        <h2>Todo está bien</h2>
+        <p>Respira por:</p>
+        <div id="rhythmTimer" style="font-size: 2rem; font-weight: bold;">09:00</div>
+    </div>
+</div>
+
+
+
+
+
+<script src="script.js"></script>
+</body>
+</html>

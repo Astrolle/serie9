@@ -1,0 +1,369 @@
+
+let completedProductiveTasks = 0;
+let pauseCompletedAfterLimit = true;
+let currentNoteTaskId = null;
+const taskNotes = {};
+const stressByDay = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
+
+function formatTime(totalSeconds) {
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+}
+
+function addTask() {
+  const input = document.getElementById("taskInput");
+  const type = document.getElementById("taskType").value;
+  const taskName = input.value.trim();
+  if (taskName === "") return;
+
+  let subType = document.getElementById("pauseType").value;
+  const customInput = document.getElementById("customPauseInput").value.trim();
+  if (customInput !== "") subType = customInput;
+
+  const duration = type === "pause" ? 9 * 60 : 27 * 60;
+  const card = document.createElement("div");
+  card.classList.add("task-card");
+
+  if (type === "productive") card.classList.add("task-productive");
+  else {
+    card.classList.add("task-pause");
+    const subtypeClass = subType.toLowerCase();
+    const valid = { "leer": "read", "respirar": "breathe", "pensar": "think", "meditar": "meditate" };
+    if (valid[subtypeClass]) card.classList.add(valid[subtypeClass]);
+    else card.style.backgroundColor = "#eee";
+  }
+
+  card.draggable = true;
+  card.ondragstart = drag;
+  card.id = `task-${Date.now()}`;
+
+  const label = document.createElement("span");
+  label.textContent = type === "pause"
+      ? `${taskName} [Pausa: ${subType}]`
+      : `${taskName} [Productivo]`;
+
+  const timer = document.createElement("span");
+  timer.textContent = formatTime(duration);
+  timer.style.marginLeft = "10px";
+
+  const startBtn = document.createElement("button");
+  startBtn.textContent = "▶️";
+  startBtn.onclick = () => startCountdown(timer, startBtn, duration, type, card);
+
+  const restartBtn = document.createElement("button");
+  restartBtn.textContent = "🔁";
+  restartBtn.style.display = "none";
+  restartBtn.onclick = () => restartTask(timer, duration, type, card, startBtn, restartBtn);
+
+  const deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "❌";
+  deleteBtn.onclick = () => {
+    if (confirm("¿Deseas eliminar esta tarea?")) {
+      if (taskNotes[card.id]) delete taskNotes[card.id];
+      card.remove();
+      saveToLocalStorage();
+    }
+  };
+
+  card.appendChild(label);
+  card.appendChild(timer);
+  card.appendChild(startBtn);
+
+  if (type === "productive") {
+    const noteBtn = document.createElement("button");
+    noteBtn.textContent = "💬";
+    noteBtn.onclick = () => openNotes(card.id);
+    card.appendChild(noteBtn);
+    card.appendChild(restartBtn);
+    openNotes(card.id);
+  }
+
+  card.appendChild(deleteBtn);
+  document.getElementById("waitingColumn").appendChild(card);
+  saveToLocalStorage();
+
+  input.value = "";
+  document.getElementById("customPauseInput").value = "";
+}
+
+function restartTask(timerElement, duration, type, card, startBtn, restartBtn) {
+  const day = new Date().getDay();
+  if (type === "productive") {
+    stressByDay[day] = (stressByDay[day] || 0) + 1;
+    completedProductiveTasks++;
+    drawStressHeatmap();
+  }
+  restartBtn.style.display = "none";
+  timerElement.textContent = formatTime(duration);
+  startCountdown(timerElement, startBtn, duration, type, card, restartBtn);
+}
+
+function startCountdown(timerElement, button, duration, type, card, restartBtn = null) {
+  let totalSeconds = duration;
+  button.disabled = true;
+
+  const interval = setInterval(() => {
+    timerElement.textContent = formatTime(totalSeconds);
+    totalSeconds--;
+
+    if (totalSeconds < 0) {
+      clearInterval(interval);
+      timerElement.textContent = "✅";
+
+      const day = new Date().getDay();
+      if (type === "productive") {
+        completedProductiveTasks++;
+        pauseCompletedAfterLimit = false;
+        stressByDay[day] = (stressByDay[day] || 0) + 1;
+        const btn = restartBtn || card.querySelector("button:nth-of-type(4)");
+        if (btn) btn.style.display = "inline-block";
+      } else if (type === "pause") {
+        completedProductiveTasks = 0;
+        pauseCompletedAfterLimit = true;
+        stressByDay[day] = Math.max((stressByDay[day] || 0) - 1, 0);
+      }
+
+      drawStressHeatmap();
+      saveToLocalStorage();
+    }
+  }, 1000);
+}
+
+function drawStressHeatmap() {
+  const canvas = document.getElementById("stressHeatmap");
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const days = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+  const maxStress = 4;
+  const boxWidth = canvas.width / 7;
+  const boxHeight = canvas.height;
+
+  for (let i = 0; i < 7; i++) {
+    const stress = Math.min(stressByDay[i] || 0, maxStress);
+    const color = getStressColor(stress);
+    ctx.fillStyle = color;
+    ctx.fillRect(i * boxWidth, 0, boxWidth, boxHeight);
+    ctx.fillStyle = "white";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText(days[i], i * boxWidth + boxWidth / 2, 15);
+  }
+}
+
+function getStressColor(stress) {
+  switch (stress) {
+    case 0: return "green";
+    case 1: return "yellow";
+    case 2: return "orange";
+    case 3: return "#ff4500";
+    default: return "red";
+  }
+}
+
+function allowDrop(event) {
+  event.preventDefault();
+}
+
+function drag(event) {
+  event.dataTransfer.setData("text", event.target.id);
+}
+
+function drop(event) {
+  event.preventDefault();
+  const data = event.dataTransfer.getData("text");
+  const task = document.getElementById(data);
+  event.target.closest(".column").appendChild(task);
+  saveToLocalStorage();
+}
+
+function openNotes(taskId) {
+  currentNoteTaskId = taskId;
+  document.getElementById("notesSidebar").classList.remove("hidden");
+  document.getElementById("notesSidebar").classList.add("show");
+  document.getElementById("notesTextarea").value = taskNotes[taskId] || "";
+  document.getElementById("notesTextarea").style.display = "block";
+  document.getElementById("saveNoteBtn").style.display = "inline-block";
+  document.getElementById("notesList").style.display = "none";
+}
+
+function closeNotes() {
+  document.getElementById("notesSidebar").classList.remove("show");
+  document.getElementById("notesSidebar").classList.add("hidden");
+  currentNoteTaskId = null;
+}
+
+function saveNote() {
+  if (!currentNoteTaskId) return;
+  const note = document.getElementById("notesTextarea").value.trim();
+  if (note) {
+    taskNotes[currentNoteTaskId] = note;
+    saveToLocalStorage();
+  }
+  closeNotes();
+}
+
+function showAllNotes() {
+  const sidebar = document.getElementById("notesSidebar");
+  const notesList = document.getElementById("notesList");
+  const textarea = document.getElementById("notesTextarea");
+  const saveBtn = document.getElementById("saveNoteBtn");
+
+  textarea.style.display = "none";
+  saveBtn.style.display = "none";
+  notesList.style.display = "flex";
+  notesList.innerHTML = "";
+
+  Object.keys(taskNotes).forEach(taskId => {
+    const taskEl = document.getElementById(taskId);
+    if (!taskEl) return;
+
+    const label = taskEl.querySelector("span");
+    const note = taskNotes[taskId];
+
+    if (label && note) {
+      const wrapper = document.createElement("div");
+      wrapper.style.padding = "12px";
+      wrapper.style.border = "1px solid #ddd";
+      wrapper.style.borderRadius = "10px";
+      wrapper.style.background = "#f8f9fa";
+
+      const taskTitle = document.createElement("strong");
+      taskTitle.textContent = label.textContent;
+
+      const noteText = document.createElement("p");
+      noteText.textContent = note;
+      noteText.style.marginTop = "6px";
+      noteText.style.whiteSpace = "pre-wrap";
+
+      wrapper.appendChild(taskTitle);
+      wrapper.appendChild(noteText);
+      notesList.appendChild(wrapper);
+    }
+  });
+
+  sidebar.classList.remove("hidden");
+  sidebar.classList.add("show");
+}
+
+function saveToLocalStorage() {
+  const allTasks = Array.from(document.querySelectorAll(".task-card")).map(card => {
+    return {
+      id: card.id,
+      label: card.querySelector("span")?.textContent || "",
+      classList: [...card.classList],
+      parentId: card.parentElement.id
+    };
+  });
+
+  localStorage.setItem("serie9.tasks", JSON.stringify(allTasks));
+  localStorage.setItem("serie9.notes", JSON.stringify(taskNotes));
+  localStorage.setItem("serie9.stress", JSON.stringify(stressByDay));
+}
+
+function loadFromLocalStorage() {
+  const tasks = JSON.parse(localStorage.getItem("serie9.tasks") || "[]");
+  const notes = JSON.parse(localStorage.getItem("serie9.notes") || "{}");
+  const stress = JSON.parse(localStorage.getItem("serie9.stress") || "{}");
+
+  Object.assign(taskNotes, notes);
+  Object.assign(stressByDay, stress);
+
+  for (const task of tasks) {
+    const card = document.createElement("div");
+    card.id = task.id;
+    card.className = "task-card";
+    task.classList.forEach(c => card.classList.add(c));
+
+    const label = document.createElement("span");
+    label.textContent = task.label;
+
+    const timer = document.createElement("span");
+    timer.textContent = "27:00";
+    timer.style.marginLeft = "10px";
+
+    const startBtn = document.createElement("button");
+    startBtn.textContent = "▶️";
+    startBtn.onclick = () => startCountdown(timer, startBtn, 27 * 60, "productive", card);
+
+    const restartBtn = document.createElement("button");
+    restartBtn.textContent = "🔁";
+    restartBtn.style.display = "none";
+    restartBtn.onclick = () => restartTask(timer, 27 * 60, "productive", card, startBtn, restartBtn);
+
+    const noteBtn = document.createElement("button");
+    noteBtn.textContent = "💬";
+    noteBtn.onclick = () => openNotes(card.id);
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "❌";
+    deleteBtn.onclick = () => {
+      if (confirm("¿Deseas eliminar esta tarea?")) {
+        if (taskNotes[card.id]) delete taskNotes[card.id];
+        card.remove();
+        saveToLocalStorage();
+      }
+    };
+
+    card.appendChild(label);
+    card.appendChild(timer);
+    card.appendChild(startBtn);
+    card.appendChild(restartBtn);
+    card.appendChild(noteBtn);
+    card.appendChild(deleteBtn);
+
+    const parent = document.getElementById(task.parentId);
+    if (parent) parent.appendChild(card);
+  }
+}
+
+function openModal() {
+  document.getElementById("taskInput").value = "";
+  document.getElementById("customPauseInput").value = "";
+  document.getElementById("taskModal").style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById("taskModal").style.display = "none";
+}
+
+window.onload = () => {
+  createWeekColumns();
+  loadFromLocalStorage();
+  drawStressHeatmap();
+  const loading = document.getElementById("loadingScreen");
+  if (loading) {
+    loading.classList.add("fade-out");
+    setTimeout(() => loading.remove(), 1600);
+  }
+};
+
+function createWeekColumns() {
+  const kanban = document.getElementById("kanbanBoard");
+  const today = new Date();
+  const currentWeek = Math.ceil((((today - new Date(today.getFullYear(), 0, 1)) / 86400000) + today.getDay() + 1) / 7);
+  const year = today.getFullYear();
+  const weeksToShow = [-1, 0, 1, 2];
+  weeksToShow.forEach(offset => {
+    const weekNum = currentWeek + offset;
+    const column = document.createElement("div");
+    column.className = "column";
+    column.id = `week-${weekNum}`;
+    column.ondragover = allowDrop;
+    column.ondrop = drop;
+    const title = document.createElement("h3");
+    title.innerText = `Semana ${weekNum}`;
+    column.appendChild(title);
+    kanban.appendChild(column);
+  });
+};
+
+// 🛠️ Registro de Service Worker para PWA
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+    console.log('Service Worker registrado con éxito:', registration.scope);
+  }).catch(function(error) {
+    console.log('Fallo al registrar el Service Worker:', error);
+  });
+}
