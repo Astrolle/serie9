@@ -88,7 +88,9 @@ Si esta herramienta te sirve para enfocarte mejor, pausar con sentido o reconect
 
 > Serie9 no es para correr más, es para vivir mejor.
 
-Gracias: 
+
+
+Gracias a todos los que contribuyan: 
 
 <a href="https://github.com/Astrolle/serie9/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=Astrolle/serie9" />
