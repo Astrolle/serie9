@@ -1,4 +1,4 @@
-# ∞∙9 Serie9
+# ∞∙9 Serie9 - VibeCoding APP
 
 ```
         Serie9.club      
