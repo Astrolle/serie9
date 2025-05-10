@@ -1,0 +1,764 @@
+/* Enhanced Header Styles for Serie9 */
+
+/* Option 1: Enhanced Current Design */
+.serie9-header-v1 {
+    background: linear-gradient(135deg, #008060 0%, #006e52 100%);
+    color: white;
+    padding: 16px 24px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.serie9-header-v1 .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.serie9-header-v1 .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.serie9-header-v1 .logo-symbol {
+    font-size: 2rem;
+    font-weight: bold;
+    background: white;
+    color: #008060;
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.serie9-header-v1 .logo-text h1 {
+    font-size: 1.2rem;
+    margin: 0;
+    font-weight: 600;
+}
+
+.serie9-header-v1 .tagline {
+    font-size: 0.85rem;
+    margin: 2px 0 0 0;
+    opacity: 0.9;
+}
+
+.serie9-header-v1 .header-right {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.serie9-header-v1 .breathing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.serie9-header-v1 .breathing-circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #4ade80;
+    animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.5); opacity: 1; }
+}
+
+.serie9-header-v1 .user-stats {
+    display: flex;
+    gap: 24px;
+}
+
+.serie9-header-v1 .stat-item {
+    text-align: center;
+}
+
+.serie9-header-v1 .stat-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.serie9-header-v1 .stat-label {
+    font-size: 0.75rem;
+    opacity: 0.9;
+}
+
+/* Option 2: Minimalist Zen Design */
+.serie9-header-v2 {
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 12px 24px;
+}
+
+.serie9-header-v2 .zen-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.serie9-header-v2 .zen-logo {
+    display: flex;
+    align-items: baseline;
+    font-size: 1.8rem;
+    font-weight: 300;
+}
+
+.serie9-header-v2 .infinity {
+    color: #008060;
+}
+
+.serie9-header-v2 .dot {
+    color: #637381;
+    margin: 0 2px;
+}
+
+.serie9-header-v2 .nine {
+    color: #008060;
+    font-weight: 500;
+}
+
+.serie9-header-v2 .zen-nav {
+    display: flex;
+    gap: 8px;
+}
+
+.serie9-header-v2 .zen-btn {
+    background: transparent;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    color: #637381;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.serie9-header-v2 .zen-btn:hover,
+.serie9-header-v2 .zen-btn.active {
+    background: #f3f4f6;
+    color: #008060;
+}
+
+.serie9-header-v2 .current-cycle {
+    text-align: right;
+}
+
+.serie9-header-v2 .cycle-type {
+    display: block;
+    font-size: 0.75rem;
+    color: #637381;
+}
+
+.serie9-header-v2 .cycle-time {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #008060;
+}
+
+/* Option 3: Progressive Header */
+.serie9-header-v3 {
+    background: #fafafa;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 16px 24px;
+}
+
+.serie9-header-v3 .progressive-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.serie9-header-v3 .brand-section {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.serie9-header-v3 .animated-logo {
+    width: 100px;
+    height: 40px;
+}
+
+.serie9-header-v3 .logo-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.serie9-header-v3 .infinity-path {
+    fill: none;
+    stroke: #008060;
+    stroke-width: 3;
+    stroke-linecap: round;
+}
+
+.serie9-header-v3 .nine-text {
+    fill: #008060;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.serie9-header-v3 .brand-text h1 {
+    font-size: 1.5rem;
+    margin: 0;
+    color: #212b36;
+}
+
+.serie9-header-v3 .daily-intention {
+    font-size: 0.9rem;
+    color: #637381;
+    margin: 4px 0 0 0;
+    font-style: italic;
+}
+
+.serie9-header-v3 .progress-ring {
+    width: 60px;
+    height: 60px;
+    position: relative;
+}
+
+.serie9-header-v3 .circular-chart {
+    transform: rotate(-90deg);
+}
+
+.serie9-header-v3 .circle-bg {
+    fill: none;
+    stroke: #e5e7eb;
+    stroke-width: 3.8;
+}
+
+.serie9-header-v3 .circle {
+    fill: none;
+    stroke: #008060;
+    stroke-width: 3.8;
+    stroke-linecap: round;
+}
+
+.serie9-header-v3 .percentage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #008060;
+}
+
+.serie9-header-v3 .quick-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.serie9-header-v3 .quick-pause,
+.serie9-header-v3 .quick-breathe {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #e5e7eb;
+    background: white;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.serie9-header-v3 .quick-pause:hover,
+.serie9-header-v3 .quick-breathe:hover {
+    background: #f3f4f6;
+    border-color: #008060;
+}
+
+/* Option 4: Interactive Mood-Based Header */
+.serie9-header-v4 {
+    background: linear-gradient(to right, #f8fafc, #f3f4f6);
+    border-bottom: 1px solid #e5e7eb;
+    padding: 16px 24px;
+}
+
+.serie9-header-v4 .mood-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.serie9-header-v4 .logo-mood {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.serie9-header-v4 .logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #008060;
+}
+
+.serie9-header-v4 .mood-selector {
+    border-left: 1px solid #e5e7eb;
+    padding-left: 24px;
+}
+
+.serie9-header-v4 .mood-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #637381;
+    margin-bottom: 8px;
+}
+
+.serie9-header-v4 .mood-options {
+    display: flex;
+    gap: 8px;
+}
+
+.serie9-header-v4 .mood-btn {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #e5e7eb;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+}
+
+.serie9-header-v4 .mood-btn:hover,
+.serie9-header-v4 .mood-btn.active {
+    background: #e3f1e9;
+    border-color: #008060;
+    transform: scale(1.1);
+}
+
+.serie9-header-v4 .adaptive-message h1 {
+    font-size: 1.2rem;
+    margin: 0;
+    color: #212b36;
+}
+
+.serie9-header-v4 .mood-based-tip {
+    font-size: 0.9rem;
+    color: #637381;
+    margin: 4px 0 0 0;
+}
+
+.serie9-header-v4 .session-info {
+    background: white;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.serie9-header-v4 .session-type {
+    display: block;
+    font-size: 0.75rem;
+    color: #637381;
+}
+
+.serie9-header-v4 .session-name {
+    display: block;
+    font-weight: 600;
+    color: #212b36;
+    margin: 4px 0;
+}
+
+.serie9-header-v4 .session-timer {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #008060;
+}
+
+/* Option 5: Floating Ambient Header */
+.serie9-header-v5 {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+    padding: 12px 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+.serie9-header-v5 .ambient-container {
+    position: relative;
+    z-index: 1;
+}
+
+.serie9-header-v5 .floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.serie9-header-v5 .floating-bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(0, 128, 96, 0.1);
+    animation: float 6s ease-in-out infinite;
+}
+
+.serie9-header-v5 .bubble-1 {
+    width: 80px;
+    height: 80px;
+    top: -20px;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.serie9-header-v5 .bubble-2 {
+    width: 60px;
+    height: 60px;
+    top: 20px;
+    right: 15%;
+    animation-delay: 2s;
+}
+
+.serie9-header-v5 .bubble-3 {
+    width: 40px;
+    height: 40px;
+    bottom: -10px;
+    left: 50%;
+    animation-delay: 4s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-20px) scale(1.1); }
+}
+
+.serie9-header-v5 .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.serie9-header-v5 .minimal-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #008060;
+}
+
+.serie9-header-v5 .ambient-nav {
+    display: flex;
+    gap: 32px;
+}
+
+.serie9-header-v5 .nav-link {
+    color: #637381;
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 8px 0;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.serie9-header-v5 .nav-link:hover,
+.serie9-header-v5 .nav-link.active {
+    color: #008060;
+    border-bottom-color: #008060;
+}
+
+.serie9-header-v5 .zen-toggle {
+    background: white;
+    border: 1px solid #e5e7eb;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.serie9-header-v5 .zen-toggle:hover {
+    background: #f3f4f6;
+    border-color: #008060;
+}
+
+
+/* Contenedor principal */
+.breathing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Opción 1: Emoji de pulmón animado */
+.lung-container {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lung-emoji {
+    font-size: 28px;
+    display: inline-block;
+    animation: breathe-lung 4s ease-in-out infinite;
+    transform-origin: center;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+@keyframes breathe-lung {
+    0%, 100% {
+        transform: scale(0.9);
+        filter: brightness(0.95);
+    }
+    50% {
+        transform: scale(1.2);
+        filter: brightness(1.1);
+    }
+}
+
+/* Opción 2: SVG de pulmón personalizado */
+.lung-svg-container {
+    width: 40px;
+    height: 40px;
+    position: relative;
+}
+
+.lung-svg {
+    width: 100%;
+    height: 100%;
+    animation: breathe-svg 4s ease-in-out infinite;
+}
+
+.lung-svg .left-lung,
+.lung-svg .right-lung {
+    transform-origin: center;
+    animation: lung-expand 4s ease-in-out infinite;
+}
+
+.lung-svg .left-lung {
+    transform-origin: 40px 50px;
+}
+
+.lung-svg .right-lung {
+    transform-origin: 60px 50px;
+}
+
+@keyframes breathe-svg {
+    0%, 100% {
+        transform: scale(0.9);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes lung-expand {
+    0%, 100% {
+        transform: scale(0.95);
+        fill: #ff9999;
+    }
+    50% {
+        transform: scale(1.1);
+        fill: #ff7b7b;
+    }
+}
+
+/* Opción 3: Pulmón minimalista con CSS */
+.minimal-lung {
+    width: 36px;
+    height: 36px;
+    position: relative;
+    animation: breathe-minimal 4s ease-in-out infinite;
+}
+
+.lung-left,
+.lung-right {
+    position: absolute;
+    width: 16px;
+    height: 24px;
+    background: linear-gradient(45deg, #ff9999, #ff7b7b);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    top: 8px;
+    box-shadow: inset 0 2px 4px rgba(255,255,255,0.3),
+    0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lung-left {
+    left: 2px;
+    transform-origin: right center;
+    animation: lung-left-breathe 4s ease-in-out infinite;
+}
+
+.lung-right {
+    right: 2px;
+    transform-origin: left center;
+    animation: lung-right-breathe 4s ease-in-out infinite;
+}
+
+.lung-stem {
+    position: absolute;
+    width: 3px;
+    height: 12px;
+    background: #ff7b7b;
+    left: 50%;
+    top: -2px;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.lung-stem::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    height: 8px;
+    background: #ff7b7b;
+    bottom: -6px;
+    left: -5px;
+    transform: rotate(-30deg);
+    border-radius: 2px;
+}
+
+.lung-stem::before {
+    content: '';
+    position: absolute;
+    width: 3px;
+    height: 8px;
+    background: #ff7b7b;
+    bottom: -6px;
+    right: -5px;
+    transform: rotate(30deg);
+    border-radius: 2px;
+}
+
+@keyframes breathe-minimal {
+    0%, 100% {
+        transform: scale(0.9);
+    }
+    50% {
+        transform: scale(1.15);
+    }
+}
+
+@keyframes lung-left-breathe {
+    0%, 100% {
+        transform: scaleX(0.9) rotate(-5deg);
+    }
+    50% {
+        transform: scaleX(1.1) rotate(5deg);
+    }
+}
+
+@keyframes lung-right-breathe {
+    0%, 100% {
+        transform: scaleX(0.9) rotate(5deg);
+    }
+    50% {
+        transform: scaleX(1.1) rotate(-5deg);
+    }
+}
+
+/* Texto de respiración actualizado */
+.breathing-text {
+    display: none;
+}
+
+/* Estados de respiración con colores */
+.breathing-indicator.inhaling .lung-emoji,
+.breathing-indicator.inhaling .lung-svg path,
+.breathing-indicator.inhaling .lung-left,
+.breathing-indicator.inhaling .lung-right {
+    filter: brightness(1.2);
+}
+
+.breathing-indicator.exhaling .lung-emoji,
+.breathing-indicator.exhaling .lung-svg path,
+.breathing-indicator.exhaling .lung-left,
+.breathing-indicator.exhaling .lung-right {
+    filter: brightness(0.9);
+}
+
+/* Versión compacta para móviles */
+@media (max-width: 768px) {
+    .breathing-indicator {
+        gap: 8px;
+    }
+
+    .lung-container,
+    .lung-svg-container,
+    .minimal-lung {
+        width: 32px;
+        height: 32px;
+    }
+
+    .lung-emoji {
+        font-size: 24px;
+    }
+
+    .breathing-text {
+        font-size: 0.8rem;
+        min-width: auto;
+    }
+}
+
+/* Efecto de pulso adicional */
+.lung-pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    animation: pulse-ring 4s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.5;
+    }
+}
+
+/* Responsive Design for All Headers */
+@media (max-width: 768px) {
+    .header-container,
+    .zen-container,
+    .progressive-container,
+    .mood-container,
+    .header-content {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+    }
+
+    .header-right,
+    .zen-nav,
+    .progress-section,
+    .session-info,
+    .ambient-nav {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .daily-progress {
+        justify-content: center;
+    }
+}

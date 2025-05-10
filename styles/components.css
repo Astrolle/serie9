@@ -1,0 +1,120 @@
+/* Serie9 Components - Reusable UI components */
+
+/* Buttons */
+.btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--light-gray);
+}
+
+/* FAB (Floating Action Button) */
+.fab {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    z-index: 1000;
+}
+
+.fab:hover {
+    background-color: var(--primary-hover);
+    transform: scale(1.05);
+}
+
+/* Labels */
+.label-small {
+    font-size: 0.875rem;
+    color: #6b778c;
+    display: block;
+    margin-bottom: 4px;
+}
+
+/* Close Button */
+.close {
+    font-size: 1.1rem;
+    color: #999;
+    cursor: pointer;
+    position: absolute;
+    right: 14px;
+    top: 10px;
+    background: none;
+    border: none;
+    padding: 4px 8px;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.close:hover {
+    opacity: 1;
+    color: #555;
+}
+
+/* Toast Notification */
+.toast-notification {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--primary-color);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 9999;
+    font-family: var(--font-primary);
+    animation: toast-appear 0.3s ease-out;
+}
+
+.toast-notification.fade-out {
+    animation: toast-disappear 0.3s ease-out forwards;
+}
+
+/* Badge */
+.journal-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #ff4757;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}

@@ -9,7 +9,7 @@
     <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#000000" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="tutorial.css" />
+    <link rel="stylesheet" href="styles/tutorial.css" />
 </head>
 <body>
 
@@ -19,10 +19,51 @@
     <div class="loading-message">Diseñado por humanos. Ejecutado por IA.</div>
 </div>
 
-<header class="d-flex align-items-center px-3 py-2">
-    <div class="d-flex align-items-center gap-3">
-        <div style="font-size: 1.2rem; font-weight: bold; margin-right: 12px;">∞∙9</div>
-        <h1 class="h5 mb-0">Tiempos para Crear y Detenerse</h1>
+<!-- Header Design Options for Serie9 -->
+
+<!-- Option 1: Enhanced Current Design with Breathing Indicator -->
+<header class="serie9-header-v1">
+    <div class="header-container">
+        <div class="header-left">
+            <div class="logo-container">
+                <div class="logo-symbol">∞∙9</div>
+                <div class="logo-text">
+                    <h1>Tiempos para Crear y Detenerse</h1>
+                    <p class="tagline">Respira. Crea. Repite.</p>
+                </div>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="breathing-indicator">
+                <div class="lung-svg-container">
+                    <svg class="lung-svg" viewBox="0 0 100 100" width="40" height="40">
+                        <g class="left-lung">
+                            <path d="M30 20 Q15 20 10 40 T25 80 Q30 85 40 75 Q45 60 40 40 Q35 20 30 20"
+                                  fill="#ff7b7b" stroke="#ff5555" stroke-width="2"/>
+                        </g>
+                        <g class="right-lung">
+                            <path d="M70 20 Q85 20 90 40 T75 80 Q70 85 60 75 Q55 60 60 40 Q65 20 70 20"
+                                  fill="#ff7b7b" stroke="#ff5555" stroke-width="2"/>
+                        </g>
+                        <g class="trachea">
+                            <path d="M50 10 L50 30 M50 30 Q45 35 40 40 M50 30 Q55 35 60 40"
+                                  fill="none" stroke="#ff5555" stroke-width="3" stroke-linecap="round"/>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="user-stats">
+                <div class="stat-item">
+                    <span class="stat-value">3</span>
+                    <span class="stat-label">Ciclos hoy</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">27m</span>
+                    <span class="stat-label">Enfoque total</span>
+                </div>
+            </div>
+        </div>
     </div>
 </header>
 
@@ -143,6 +184,10 @@
         <p>En Serie9 creemos que cada pausa tiene un propósito: respirar, reflexionar, observar, crear. No es ocio, es intención.</p>
         <p><strong>Esto no es solo una app, es un movimiento.</strong></p>
 
+        <a href="manifesto.html" class="manifesto-link">
+            <strong>📜 Manifiesto Completo</strong>
+        </a>
+
         <p>Gracias a todas las personas que apoyan este proyecto y hacen posible que más seres humanos se regalen el derecho de detenerse.</p>
         <img src="https://contrib.rocks/image?repo=Astrolle/serie9" />
 
@@ -164,8 +209,19 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="script.js"></script>
-<script src="tutorial.js"></script>
-<audio id="startSound" src="sounds/start-sound.mp3" preload="auto"></audio>
-<audio id="endSound" src="sounds/end-sound.mp3" preload="auto"></audio>
+<script src="scripts/tutorial.js"></script>
+<script src="scripts/header.js"></script>
+<script src="scripts/philosophical-enhancements.js"></script>
+<audio id="startSound" src="start-sound.mp3" preload="auto"></audio>
+<audio id="endSound" src="end-sound.mp3" preload="auto"></audio>
+
+<script>
+    // Llamar a esta función cuando se inicialice el header
+    document.addEventListener('DOMContentLoaded', () => {
+        updateHeaderWithLung();
+        initBreathingIndicator();
+        // O usa initAdvancedBreathing() para el patrón 4-7-8
+    });
+</script>
 </body>
 </html>

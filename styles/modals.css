@@ -1,0 +1,120 @@
+/* Serie9 Modals - All modal-related styles */
+
+/* Base Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: var(--white);
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 14px;
+    width: 90%;
+    max-width: 420px;
+    box-shadow: var(--modal-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+}
+
+/* Task Modal */
+#taskModal .modal-content {
+    max-width: 480px;
+}
+
+#pauseOptions {
+    margin-top: 16px;
+}
+
+/* Rhythm Modal */
+#rhythmModal .modal-content {
+    text-align: center;
+}
+
+#rhythmTimer {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin: 20px 0;
+}
+
+/* Calendar Heatmap Modal */
+#calendarHeatmapModal .modal-content {
+    max-width: 600px;
+}
+
+/* Reflection Modal */
+.reflection-modal {
+    max-width: 500px;
+    padding: 40px;
+}
+
+.reflection-prompt {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+    line-height: 1.5;
+    text-align: center;
+    font-style: italic;
+}
+
+/* Journal Modal */
+.journal-modal {
+    max-width: 700px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+#journalModal .modal-content {
+    position: relative;
+}
+
+#journalModal h2 {
+    margin-right: 140px;
+}
+
+/* Weekly Summary Modal */
+.summary-modal .modal-content {
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+/* Journal Entry Modal */
+.journal-entry-modal {
+    max-width: 500px;
+    padding: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 5% auto;
+        padding: 24px;
+    }
+
+    .reflection-modal,
+    .journal-modal,
+    .summary-modal .modal-content,
+    .journal-entry-modal {
+        width: 95%;
+        margin: 5% auto;
+        padding: 20px;
+    }
+
+    #journalModal h2 {
+        margin-right: 0;
+    }
+}

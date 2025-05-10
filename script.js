@@ -1,9 +1,33 @@
+//Definitions
+if (typeof window.totalFocusTime === 'undefined') {
+  window.totalFocusTime = parseInt(localStorage.getItem('serie9.totalFocusTime') || '0');
+}
+
+
 const todayStr = new Date().toISOString().slice(0, 10);
 let completedProductiveTasks = 0;
 let pauseCompletedAfterLimit = true;
 let currentNoteTaskId = null;
 const taskNotes = {};
 const stressByDate = {}; // Clave: YYYY-MM-DD
+
+
+
+// Cargar tiempo guardado del localStorage al iniciar
+function loadTotalFocusTime() {
+  const savedTime = localStorage.getItem('serie9.totalFocusTime');
+  if (savedTime) {
+    totalFocusTime = parseInt(savedTime) || 0;
+  }
+  console.log('Tiempo cargado:', totalFocusTime);
+}
+
+// Guardar tiempo en localStorage
+function saveTotalFocusTime() {
+  localStorage.setItem('serie9.totalFocusTime', totalFocusTime.toString());
+}
+
+
 
 function formatTime(totalSeconds) {
   const minutes = Math.floor(totalSeconds / 60);
@@ -130,6 +154,7 @@ function restartTask(timerElement, duration, type, card, startBtn, restartBtn) {
   saveToLocalStorage();
 }
 
+// Actualizar la función startCountdown para rastrear el tiempo
 function startCountdown(timerElement, button, duration, type, card, restartBtn = null, originalDuration = duration) {
   let totalSeconds = duration;
   const progressBar = card.querySelector(".progress-bar");
@@ -140,7 +165,6 @@ function startCountdown(timerElement, button, duration, type, card, restartBtn =
   card.dataset.locked = "true";
   document.getElementById("startSound").play().catch(() => {});
 
-  // Guardar en localStorage con duración y tipo
   localStorage.setItem(`serie9.timer.${taskId}`, JSON.stringify({
     startTime: Date.now(),
     duration: originalDuration,
@@ -156,6 +180,18 @@ function startCountdown(timerElement, button, duration, type, card, restartBtn =
 
     totalSeconds--;
 
+    // ESTA ES LA PARTE CRÍTICA QUE FALTA
+    if (type === "productive" && totalSeconds >= 0) {
+      totalFocusTime = (totalFocusTime || 0) + 1; // Sin window. si es variable local
+      // O
+      window.totalFocusTime = (window.totalFocusTime || 0) + 1; // Con window. si es global
+
+      // Actualizar el header cada segundo
+      if (window.headerFunctions && window.headerFunctions.updateUserStats) {
+        window.headerFunctions.updateUserStats();
+      }
+    }
+
     if (totalSeconds < 0) {
       card.draggable = true;
       delete card.dataset.locked;
@@ -163,6 +199,9 @@ function startCountdown(timerElement, button, duration, type, card, restartBtn =
       timerElement.textContent = "✅";
       document.getElementById("endSound").play().catch(() => {});
       localStorage.removeItem(`serie9.timer.${taskId}`);
+
+      // Guardar el tiempo total al completar
+      saveTotalFocusTime();
 
       const day = new Date().getDay();
 
@@ -182,6 +221,12 @@ function startCountdown(timerElement, button, duration, type, card, restartBtn =
         completedProductiveTasks = 0;
         pauseCompletedAfterLimit = true;
         stressByDate[todayStr] = Math.max((stressByDate[todayStr] || 0) - 1, 0);
+      }
+
+      // Actualizar el header
+      if (window.headerFunctions) {
+        window.headerFunctions.updateUserStats();
+        window.headerFunctions.updateDailyProgress();
       }
 
       drawStressHeatmap();
@@ -237,6 +282,9 @@ function drop(event) {
   const data = event.dataTransfer.getData("text");
   const task = document.getElementById(data);
   event.target.closest(".column").appendChild(task);
+  if (window.headerFunctions) {
+    window.headerFunctions.updateSessionInfo();
+  }
   saveToLocalStorage();
 }
 
@@ -309,6 +357,7 @@ function showAllNotes() {
   sidebar.classList.add("show");
 }
 
+// Modificar la función saveToLocalStorage para incluir el tiempo total
 function saveToLocalStorage() {
   const allTasks = Array.from(document.querySelectorAll(".task-card")).map(card => {
     return {
@@ -322,6 +371,29 @@ function saveToLocalStorage() {
   localStorage.setItem("serie9.tasks", JSON.stringify(allTasks));
   localStorage.setItem("serie9.notes", JSON.stringify(taskNotes));
   localStorage.setItem("serie9.stress", JSON.stringify(stressByDate));
+  localStorage.setItem("serie9.totalFocusTime", totalFocusTime); // Guardar tiempo total
+}
+
+// Función para resetear el tiempo diario (opcional)
+function resetDailyStats() {
+  totalFocusTime = 0;
+  completedProductiveTasks = 0;
+  saveTotalFocusTime();
+
+  if (window.headerFunctions) {
+    window.headerFunctions.updateUserStats();
+  }
+}
+
+// Opcional: Resetear stats diariamente a medianoche
+function checkDailyReset() {
+  const lastReset = localStorage.getItem('serie9.lastResetDate');
+  const today = new Date().toDateString();
+
+  if (lastReset !== today) {
+    resetDailyStats();
+    localStorage.setItem('serie9.lastResetDate', today);
+  }
 }
 
 function loadFromLocalStorage() {
@@ -440,17 +512,24 @@ function closeModal() {
   document.getElementById("taskModal").style.display = "none";
 }
 
+// Llamar a checkDailyReset en window.onload
 window.onload = () => {
   createWeekColumns();
   loadFromLocalStorage();
+  loadTotalFocusTime(); // ← Agregar esta línea
   drawStressHeatmap();
+
+  if (window.headerFunctions) {
+    window.headerFunctions.initHeaderFeatures();
+  }
+
   const loading = document.getElementById("loadingScreen");
   if (loading) {
     loading.classList.add("fade-out");
     setTimeout(() => loading.remove(), 1600);
   }
-};
-
+}
+// Updated createWeekColumns function for script.js
 function createWeekColumns() {
   const today = new Date();
   const currentWeek = Math.ceil((((today - new Date(today.getFullYear(), 0, 1)) / 86400000) + today.getDay() + 1) / 7);
@@ -458,9 +537,16 @@ function createWeekColumns() {
   const ids = [currentWeek - 1, currentWeek, currentWeek + 1, currentWeek + 2];
   const kanban = document.getElementById("kanbanBoard");
 
+  // Clear existing columns except the waiting column
+  const waitingColumn = document.getElementById("waitingColumn");
+  kanban.innerHTML = '';
+  if (waitingColumn) {
+    kanban.appendChild(waitingColumn);
+  }
+
   ids.forEach((weekNum, i) => {
     const column = document.createElement("div");
-    column.className = "column col-md-3";
+    column.className = "column col-md-4";
     column.id = `week-${weekNum}`;
     column.ondragover = allowDrop;
     column.ondrop = drop;
@@ -552,6 +638,39 @@ function drawCalendarHeatmap() {
     cell.appendChild(dayNumber);
     container.appendChild(cell);
   }
+}
+
+
+
+// For breathing animation sync
+function syncBreathingAnimation() {
+  const breathingCircle = document.querySelector('.breathing-circle');
+  // Add breathing sync logic
+}
+
+// For mood selection
+function handleMoodChange(mood) {
+  const message = document.querySelector('.mood-based-tip');
+  const tips = {
+    energized: "Aprovecha tu energía para tareas importantes",
+    focused: "Momento ideal para trabajo profundo",
+    stressed: "Tiempo de una pausa consciente",
+    calm: "Mantén este estado con trabajo ligero"
+  };
+  message.textContent = tips[mood];
+}
+
+// For progress calculation
+function updateDailyProgress() {
+  const completed = completedProductiveTasks;
+  const total = 6; // target cycles per day
+  const percentage = Math.round((completed / total) * 100);
+
+  const progressPath = document.querySelector('.circle');
+  progressPath.setAttribute('stroke-dasharray', `${percentage}, 100`);
+
+  const percentageText = document.querySelector('.percentage');
+  percentageText.textContent = `${percentage}%`;
 }
 
 

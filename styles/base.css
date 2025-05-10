@@ -1,0 +1,98 @@
+/* Serie9 Base Styles - Global styles, typography, and CSS variables */
+
+/* CSS Variables */
+:root {
+    --primary-color: #008060;
+    --primary-hover: #006e52;
+    --secondary-color: #637381;
+    --background-color: #f6f6f7;
+    --white: #ffffff;
+    --text-primary: #212b36;
+    --text-secondary: #637381;
+    --border-color: #dfe3e8;
+    --light-gray: #f6f8fa;
+    --card-shadow: 0 1px 2px rgba(9, 30, 66, 0.05);
+    --modal-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    --font-primary: 'Inter', 'Helvetica Neue', sans-serif;
+}
+
+/* Global Styles */
+body {
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    font-family: var(--font-primary);
+    margin: 0;
+    padding: 0;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    margin: 0;
+}
+
+h1 {
+    font-size: 1.75rem;
+}
+
+h2 {
+    font-size: 1.4rem;
+}
+
+h3 {
+    font-size: 1.1rem;
+}
+
+p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Form Elements */
+button {
+    font-family: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+input, select, textarea {
+    font-family: inherit;
+    font-size: 0.95rem;
+    border-radius: 6px;
+}
+
+input[type="number"] {
+    max-width: 80px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Links */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--primary-hover);
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+.show {
+    display: block !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}

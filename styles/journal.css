@@ -1,0 +1,118 @@
+/* Serie9 Journal - Journal system styles */
+
+/* Journal Input Section */
+.journal-input-section {
+    margin-top: 24px;
+}
+
+#reflectionInput,
+#manualJournalInput {
+    width: 100%;
+    min-height: 150px;
+    padding: 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    resize: vertical;
+    font-size: 1rem;
+    line-height: 1.6;
+    font-family: var(--font-primary);
+}
+
+/* Mood Selector */
+.mood-selector {
+    margin-top: 20px;
+}
+
+.mood-selector label {
+    display: block;
+    margin-bottom: 12px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.mood-options {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.mood-btn {
+    background-color: var(--light-gray);
+    border: 1px solid var(--border-color);
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.mood-btn:hover {
+    background-color: #e3f1e9;
+    border-color: var(--primary-color);
+}
+
+.mood-btn.selected {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Journal Actions */
+.journal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+    gap: 12px;
+}
+
+/* Journal Tabs */
+.journal-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.journal-tab {
+    background-color: var(--light-gray);
+    border: 1px solid var(--border-color);
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.journal-tab:hover {
+    background-color: #e3f1e9;
+}
+
+.journal-tab.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Journal Entries */
+.journal-entries {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+.journal-entry {
+    background-color: var(--light-gray);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    border-left: 4px solid var(--border-color);
+    transition: all 0.2s ease;
+}
+
+.journal-entry.reflection {
+    border-left-color: var(--primary-color);
+}
+
+.journal-

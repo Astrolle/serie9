@@ -1,0 +1,258 @@
+/* Serie9 Manifesto - Manifesto page styles */
+
+/* Expanded Manifesto */
+.expanded-manifesto {
+    padding: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Manifesto Sections */
+.manifesto-section {
+    margin-bottom: 40px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.manifesto-section:last-child {
+    border-bottom: none;
+}
+
+.manifesto-title {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 24px;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* Manifesto Principles */
+.manifesto-principle {
+    background-color: var(--light-gray);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.principle-number {
+    font-size: 2rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.principle-text {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.principle-explanation {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Philosophy Cards */
+.philosophy-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+}
+
+.philosophy-card {
+    background-color: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.philosophy-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.philosophy-card h4 {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+}
+
+.philosophy-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Meditation Enhancement */
+.meditation-guide {
+    text-align: center;
+    margin-top: 24px;
+}
+
+.breathing-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #e3f1e9;
+    border: 3px solid var(--primary-color);
+    margin: 0 auto 24px;
+    position: relative;
+    transition: transform 4s ease-in-out;
+}
+
+.breathing-circle.inhale {
+    transform: scale(1.2);
+}
+
+.breathing-circle.exhale {
+    transform: scale(0.8);
+}
+
+.breathing-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Progress Visualization */
+.progress-visualization {
+    margin-top: 32px;
+    padding: 24px;
+    background-color: var(--light-gray);
+    border-radius: 12px;
+}
+
+.progress-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.progress-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.progress-label {
+    min-width: 120px;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.progress-bar-container {
+    flex: 1;
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    transition: width 0.5s ease;
+}
+
+.progress-value {
+    min-width: 50px;
+    text-align: right;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Intention Widget */
+.intention-widget {
+    background-color: var(--light-gray);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+}
+
+.intention-widget h4 {
+    color: var(--primary-color);
+    margin-bottom: 12px;
+}
+
+.daily-intention {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.daily-intention input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+.daily-intention button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+/* Break Reminder */
+.break-reminder {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 16px 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 9998;
+    animation: slide-in 0.5s ease-out;
+}
+
+.break-reminder h4 {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+}
+
+.break-reminder p {
+    margin: 0 0 12px 0;
+    font-size: 0.9rem;
+}
+
+.break-reminder button {
+    background-color: white;
+    color: var(--primary-color);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-right: 8px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .philosophy-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .expanded-manifesto {
+        padding: 20px;
+    }
+}

@@ -1,0 +1,88 @@
+/* Serie9 Heatmap - Heatmap and stress visualization styles */
+
+/* Heatmap Section */
+.heatmap-section {
+    margin-bottom: 24px;
+}
+
+#stressHeatmap {
+    margin-top: 10px;
+    width: 100%;
+    max-width: 600px;
+    height: 100px;
+    border-radius: 8px;
+    background-color: var(--white);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Heatmap Grid */
+.heatmap-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    width: 100%;
+    max-width: 600px;
+    margin: 12px 0;
+}
+
+/* Heatmap Cells */
+.heatmap-cell {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 4px;
+    background-color: #ebedf0;
+    transition: background-color 0.3s ease;
+    position: relative;
+}
+
+/* Stress Levels */
+.heatmap-cell[data-level="0"] {
+    background-color: #ebedf0;
+}
+
+.heatmap-cell[data-level="1"] {
+    background-color: #c6e48b;
+}
+
+.heatmap-cell[data-level="2"] {
+    background-color: #7bc96f;
+}
+
+.heatmap-cell[data-level="3"] {
+    background-color: #239a3b;
+}
+
+.heatmap-cell[data-level="4"] {
+    background-color: #196127;
+}
+
+.heatmap-cell > div {
+    text-align: right;
+    padding: 2px;
+    font-weight: bold;
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    font-size: 0.75rem;
+}
+
+/* Calendar Heatmap Specific */
+#calendarHeatmapGrid {
+    margin-top: 20px;
+}
+
+#calendarHeatmapGrid .heatmap-cell {
+    min-height: 40px;
+    cursor: default;
+}
+
+#calendarHeatmapGrid .heatmap-cell:hover {
+    outline: 2px solid var(--primary-color);
+}
+
+/* Month title */
+#calendarMonthTitle {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 16px;
+}
