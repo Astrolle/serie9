@@ -6,6 +6,12 @@
 
 > Diseñado por humanos. Ejecutado por IA.
 
+
+### [Visita la documentación en inglés hecha con IA](https://deepwiki.com/Astrolle/serie9)
+
+
+
+
 ---
 
 ## ♻️ Qué es Serie9
