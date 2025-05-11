@@ -1,0 +1,49 @@
+/* Serie9 Privacy Policy - Privacy page specific styles */
+
+/* Privacy specific container */
+.privacy-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: var(--white);
+    box-shadow: var(--card-shadow);
+}
+
+/* Privacy highlight section */
+.privacy-highlight {
+    background-color: #e3f1e9;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+/* Privacy contact section */
+.privacy-contact {
+    background-color: var(--background-color);
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 30px;
+}
+
+/* Privacy date/version info */
+.privacy-date {
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-top: 40px;
+    text-align: center;
+}
+
+/* Privacy specific heading adjustments */
+.privacy-container h2 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+/* Privacy specific list styling */
+.privacy-container ul {
+    margin: 15px 0;
+}
+
+.privacy-container li {
+    margin-bottom: 10px;
+}

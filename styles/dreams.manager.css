@@ -1,0 +1,595 @@
+/* Serie9 Dreams Manager - Estilos para el sistema de gestión de sueños */
+
+/* Sección principal */
+.dream-tracker-section {
+    background-color: var(--white);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+}
+
+.dream-header-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.dream-header-controls h3 {
+    color: var(--primary-color);
+    margin: 0;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Modal de creación/edición de sueños */
+.dream-creator-modal {
+    max-width: 600px;
+    padding: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+/* Inputs de hitos */
+.milestone-input {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.milestone-input input {
+    flex: 1;
+}
+
+.btn-remove {
+    background-color: #ff4757;
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    padding: 0;
+}
+
+.btn-remove:hover {
+    background-color: #ff6b6b;
+}
+
+/* Grid de sueños */
+.dream-progress-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* Mensaje cuando no hay sueños */
+.no-dreams-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    background-color: var(--background-color);
+    border-radius: 12px;
+}
+
+.no-dreams-message p {
+    margin-bottom: 20px;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+/* Tarjeta de progreso */
+.dream-progress-card {
+    background-color: var(--background-color);
+    border-radius: 12px;
+    padding: 20px;
+    border-left: 4px solid var(--border-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dream-progress-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dream-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.dream-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    flex: 1;
+}
+
+.dream-icon {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.dream-info {
+    flex: 1;
+}
+
+.dream-info h4 {
+    margin: 0 0 4px 0;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.dream-description {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+/* Acciones del sueño */
+.dream-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-icon:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Estadísticas */
+.dream-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 16px;
+    background-color: var(--white);
+    border-radius: 8px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+/* Barra de progreso */
+.dream-progress-bar {
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 5px;
+    transition: width 0.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+/* Hitos */
+.dream-milestones {
+    margin-bottom: 20px;
+}
+
+.milestone {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    padding: 6px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.milestone:last-child {
+    border-bottom: none;
+}
+
+.milestone.completed {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* Botón de acción */
+.btn-dream {
+    width: 100%;
+    padding: 12px;
+    background-color: transparent;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-dream:hover {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    transform: translateY(-1px);
+}
+
+/* Estadísticas semanales */
+.dream-stats-summary {
+    background-color: var(--background-color);
+    padding: 24px;
+    border-radius: 12px;
+    margin-top: 24px;
+}
+
+.weekly-focus h4 {
+    margin-bottom: 20px;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+}
+
+#weeklyFocusChart {
+    min-height: 120px;
+}
+
+.focus-bar {
+    margin-bottom: 16px;
+}
+
+.focus-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+    color: var(--text-secondary);
+}
+
+.focus-bar-fill {
+    height: 24px;
+    border-radius: 12px;
+    transition: width 0.5s ease;
+}
+
+.no-data {
+    text-align: center;
+    color: var(--text-secondary);
+    font-style: italic;
+    padding: 40px;
+}
+
+/* Preview del sueño en modal de tareas */
+.dream-preview-card {
+    border-radius: 8px;
+    margin-top: 12px;
+}
+
+.dream-preview-card h5 {
+    margin: 0 0 8px 0;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+}
+
+.dream-preview-card p {
+    margin: 0 0 12px 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.dream-preview-stats {
+    display: flex;
+    gap: 20px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* Notificación de milestone */
+.milestone-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    padding: 16px 20px;
+    z-index: 9999;
+    animation: slideIn 0.5s ease-out;
+    border-left: 4px solid var(--primary-color);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(120%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.milestone-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.milestone-icon {
+    font-size: 2rem;
+}
+
+.milestone-text strong {
+    display: block;
+    color: var(--primary-color);
+    margin-bottom: 4px;
+}
+
+.milestone-text p {
+    margin: 0;
+    color: var(--text-secondary);
+}
+
+/* Animación shimmer */
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dream-progress-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .dream-header-controls {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+    }
+
+    .dream-stats {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .dream-card-header {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .dream-actions {
+        align-self: flex-end;
+    }
+}
+
+
+/* Serie9 Dreams Modal - Estilos para el sistema de sueños como modal */
+
+/* Modal principal de sueños */
+.dream-manager-modal {
+    max-width: 900px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 30px;
+}
+
+.dream-manager-modal h2 {
+    margin-top: 0;
+}
+
+/* Widget compacto en el dashboard */
+.dream-widget {
+    background-color: var(--white);
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 20px;
+}
+
+.widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.widget-header h4 {
+    margin: 0;
+    color: var(--primary-color);
+    font-size: 1rem;
+}
+
+.btn-small {
+    background: none;
+    border: 1px solid var(--border-color);
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+}
+
+.btn-small:hover {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Estadísticas rápidas del widget */
+.dream-quick-stats {
+    display: flex;
+    gap: 24px;
+}
+
+.quick-stat {
+    text-align: center;
+    flex: 1;
+}
+
+.stat-number {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.stat-text {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+/* Widget de progreso diario */
+.daily-progress-widget {
+    background-color: var(--white);
+    padding: 12px 16px;
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 20px;
+}
+
+.daily-progress-widget .widget-header {
+    margin-bottom: 0;
+}
+
+/* Botón en la navegación inferior */
+.nav-btn.dreams {
+    position: relative;
+}
+
+.nav-btn.dreams .badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #ff4757;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* Ajustes para el grid de sueños en modal */
+#dreamManagerModal .dream-progress-grid {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* Scrollbar personalizado para el modal */
+#dreamManagerModal .dream-progress-grid::-webkit-scrollbar {
+    width: 8px;
+}
+
+#dreamManagerModal .dream-progress-grid::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+#dreamManagerModal .dream-progress-grid::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+#dreamManagerModal .dream-progress-grid::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dream-manager-modal {
+        width: 95%;
+        max-width: none;
+        padding: 20px;
+    }
+
+    .dream-widget {
+        padding: 12px;
+    }
+
+    .dream-quick-stats {
+        gap: 16px;
+    }
+
+    .stat-number {
+        font-size: 1.5rem;
+    }
+
+    #dreamManagerModal .dream-progress-grid {
+        max-height: 50vh;
+    }
+}

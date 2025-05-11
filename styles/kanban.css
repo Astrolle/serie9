@@ -10,6 +10,7 @@
     padding-bottom: 12px;
     width: 100%;
     margin: 0 -15px; /* Negative margin to offset column padding */
+    min-height: 600px; /* Añadido: altura mínima para que se vean más alargadas */
 }
 
 /* Columns */
@@ -24,6 +25,10 @@
     display: flex;
     flex-direction: column;
     flex-shrink: 0; /* Prevent columns from shrinking */
+    min-height: 550px; /* Añadido: altura mínima para las columnas */
+    max-height: 80vh; /* Añadido: altura máxima relativa al viewport */
+    overflow-y: auto; /* Añadido: scroll vertical si hay muchas tareas */
+    position: relative; /* Añadido: para posicionamiento de elementos internos */
 }
 
 /* Waiting Column - Special styling */
@@ -38,6 +43,11 @@
     font-size: 1rem;
     color: var(--text-primary);
     min-height: 48px; /* Ensure consistent height for titles */
+    position: sticky; /* Añadido: título pegajoso al hacer scroll */
+    top: 0; /* Añadido: posición del título pegajoso */
+    background-color: inherit; /* Añadido: fondo para el título pegajoso */
+    z-index: 1; /* Añadido: z-index para el título pegajoso */
+    padding-bottom: 8px; /* Añadido: espacio inferior para el título */
 }
 
 /* Task Cards */
@@ -53,6 +63,7 @@
     gap: 8px;
     font-size: 0.95rem;
     color: var(--text-primary);
+    flex-shrink: 0; /* Añadido: evitar que las tarjetas se compriman */
 }
 
 .task-card .task-info {
@@ -146,11 +157,24 @@
     opacity: 0.95;
 }
 
+/* Empty column state - Añadido: para indicar columnas vacías */
+.column:empty::after {
+    content: 'Arrastra tareas aquí';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--text-secondary);
+    font-style: italic;
+    opacity: 0.5;
+}
+
 /* Responsive Design */
 @media (max-width: 1200px) {
     .column {
         width: calc(25% - 15px);
         min-width: 240px;
+        min-height: 500px; /* Altura mínima ajustada para pantallas medianas */
     }
 }
 
@@ -160,11 +184,13 @@
         margin: 0;
         padding: 0 10px;
         gap: 10px;
+        min-height: 450px; /* Altura mínima ajustada para móviles */
     }
 
     .column {
         width: 280px;
         min-width: 280px;
         max-width: none;
+        min-height: 400px; /* Altura mínima ajustada para móviles */
     }
 }

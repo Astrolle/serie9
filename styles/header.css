@@ -3,7 +3,7 @@
 /* Option 1: Enhanced Current Design */
 .serie9-header-v1 {
     background: linear-gradient(135deg, #008060 0%, #006e52 100%);
-    color: white;
+    color: white !important;
     padding: 16px 24px;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
 }
@@ -85,11 +85,13 @@
     display: block;
     font-size: 1.5rem;
     font-weight: bold;
+    color: white !important;
 }
 
 .serie9-header-v1 .stat-label {
     font-size: 0.75rem;
     opacity: 0.9;
+    color: white !important;
 }
 
 /* Option 2: Minimalist Zen Design */
@@ -761,4 +763,28 @@
     .daily-progress {
         justify-content: center;
     }
+}
+
+
+
+/* Estilos para el header con botón de actualización */
+
+.daily-header-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.daily-header-controls h3 {
+    color: var(--primary-color);
+    margin: 0;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.daily-header-controls .btn-secondary {
+    font-size: 0.9rem;
 }

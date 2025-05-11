@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="cf00fca8-d063-432f-ab94-64791b62eb9e" name="Changes" comment="- Añadido sistema de journal y reflexiones filosóficas&#10;  - Nuevo modal de reflexión después de pausas&#10;  - Sistema de journal con múltiples tipos de entrada&#10;  - Prompts de reflexión personalizados por tipo de pausa&#10;  - Resumen semanal con estadísticas y mood tracking&#10;  - Exportación de journal a JSON&#10;&#10;- Reorganización de CSS en arquitectura modular&#10;  - Creada estructura styles/ con archivos separados&#10;  - base.css: variables y estilos globales&#10;  - layout.css: estructura principal&#10;  - components.css: componentes reutilizables&#10;  - kanban.css: tablero kanban y tarjetas&#10;  - modals.css: todos los modales&#10;  - navigation.css: navegación inferior&#10;  - heatmap.css: visualización de estrés&#10;  - journal.css: sistema de journal&#10;  - manifesto.css: página del manifiesto&#10;  - utilities.css: clases utilitarias&#10;&#10;- Corrección de alineación del tablero Kanban&#10;  - Ajustado justify-content a flex-start&#10;  - Añadido ancho fijo para columnas&#10;  - Mejorado responsive design&#10;&#10;- Implementación de 5 diseños de header alternativos&#10;  - Header v1: Enhanced con estadísticas y breathing indicator&#10;  - Header v2: Diseño Zen minimalista&#10;  - Header v3: Header progresivo con daily progress&#10;  - Header v4: Header interactivo basado en mood&#10;  - Header v5: Header ambient con efectos flotantes&#10;  - Añadido header-functions.js para interactividad&#10;&#10;- Actualización del breathing indicator&#10;  - Reemplazado círculo por emoji de pulmón animado 🫁&#10;  - Animación sincronizada con texto Inhalando/Exhalando&#10;  - Opciones de SVG y CSS puro como alternativas&#10;&#10;- Corrección del tracking de tiempo de enfoque&#10;  - Implementado totalFocusTime como variable global&#10;  - Añadido guardado automático en localStorage&#10;  - Actualización en tiempo real durante trabajo&#10;  - Fix para problema de &quot;0m&quot; en estadísticas&#10;&#10;- Creación de página de manifiesto expandido&#10;  - Nueva página manifiesto.html&#10;  - Explicación detallada de los 9 principios&#10;  - Filosofía del ritmo interior&#10;  - Prácticas de conciencia temporal&#10;&#10;- Implementación de sistema de entrada manual al journal&#10;  - Modal para crear entradas manualmente&#10;  - Botón de entrada rápida en navegación&#10;  - Selección de tipo de entrada y mood&#10;  - Sistema de quick entries con prompts&#10;&#10;Co-authored-by: AI Assistant &lt;claude@anthropic.com&gt;">
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/serie9.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/privacy.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/daily.dream.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/dreams.manager.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/styles/dayly.dream.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/styles/dreams.manager.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/styles/privacy.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/end-sound.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/end-sound.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/serie9-chrome-app.zip" beforeDir="false" afterPath="$PROJECT_DIR$/serie9-chrome-app.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/start-sound.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/start-sound.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/header.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/kanban.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/kanban.css" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2wprGrdpYnuYxcFOYptD6aRKcvG" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/jojamartinez/repositories/astr/serie9/sounds&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/sounds" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/sounds" />
+      <recent name="$PROJECT_DIR$/scripts" />
+      <recent name="$PROJECT_DIR$/styles" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/serie9/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index.html" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cf00fca8-d063-432f-ab94-64791b62eb9e" name="Changes" comment="" />
+      <created>1746749263904</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1746749263904</updated>
+      <workItem from="1746749265041" duration="53000" />
+      <workItem from="1746749325742" duration="1831000" />
+      <workItem from="1746752812248" duration="8600000" />
+      <workItem from="1746798634257" duration="3132000" />
+      <workItem from="1746805139549" duration="1473000" />
+      <workItem from="1746900421105" duration="9646000" />
+    </task>
+    <task id="LOCAL-00001" summary="🎉 Nacimiento de Serie9&#10;&#10;Inicia Serie9, una app para reconectar con el ritmo natural: 27 minutos de enfoque, 9 minutos de pausa. &#10;Diseñada por humanos. Ejecutada por IA. &#10;Creamos tecnología que no solo mide el tiempo, sino que lo honra.&#10;&#10;Incluye:&#10;- Sistema de tareas con ciclos productivos y pausas conscientes&#10;- Heatmap de estrés diario&#10;- Notas por tarea&#10;- Modo respiración de 9 minutos&#10;- Persistencia local y soporte PWA&#10;- Filosofía y manifiesto Serie9">
+      <created>1746749440247</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1746749440247</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Creado el build para chrome y los iconos, así como la edición del manifiesto">
+      <created>1746751618955</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1746751618955</updated>
+    </task>
+    <task id="LOCAL-00003" summary="✨ Rediseño visual tipo Jira + mejoras UX/UI estilo Shopify&#10;&#10;- Agregado sistema Kanban con títulos dinámicos por semana (Retrasado, Por Terminar, etc.)&#10;- Añadida barra de progreso en cada tarjeta según tiempo (27min productivo, 9min pausa)&#10;- Alerta automática al completar 3 tareas productivas para sugerir descanso&#10;- Reorganizados botones en tarjetas al estilo Jira (superior derecha, tamaño compacto)&#10;- Estilizado heatmap de estrés semanal con diseño cuadrado inspirado en GitHub/Shopify&#10;- Integrada fuente 'Inter' y tipografía moderna tipo Shopify&#10;- Añadidos sonidos al iniciar y finalizar tareas (startSound/endSound)">
+      <created>1746768462595</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1746768462595</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat(ui): Integración de estilo Shopify en interfaz Serie9&#10;&#10;- Aplicado esquema de color inspirado en Shopify:&#10;  - Fondo general: #f6f6f7&#10;  - Cards: #f9fafb (gris claro neutro)&#10;  - Elementos activos y acentos: verde Shopify #008060&#10;- Estilizada barra de navegación superior con color institucional y tipografía optimizada&#10;- Actualizado botón flotante (FAB) con color verde Shopify&#10;- Rediseñado el footer con tonos grises y enlaces en verde Shopify&#10;- Modificado color de las tarjetas para evitar el blanco puro y armonizar con el fondo&#10;- Establecido cursor &quot;grab&quot; solo para tareas movibles; tareas activas bloquean drag con mensaje&#10;- Se evita mover tareas iniciadas y se avisa al usuario mediante alert&#10;- Al reiniciar una tarea, se aumenta el nivel de estrés (según nueva lógica emocional)&#10;- Barra de progreso ahora se mantiene al recargar la página (persistencia y precisión)&#10;- Tareas activas no pueden ser movidas de columna hasta finalizar&#10;- Código modular listo para extender a vistas tipo sticky, toast o alertas visuales&#10;&#10;Este commit mejora la coherencia visual, la accesibilidad emocional de la app y la UX de las tarjetas temporizadas bajo la filosofía Serie9.">
+      <created>1746797541263</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1746797541263</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat(ui): Integración de estilo Shopify en interfaz Serie9&#10;&#10;- Aplicado esquema de color inspirado en Shopify:&#10;  - Fondo general: #f6f6f7&#10;  - Cards: #f9fafb (gris claro neutro)&#10;  - Elementos activos y acentos: verde Shopify #008060&#10;- Estilizada barra de navegación superior con color institucional y tipografía optimizada&#10;- Actualizado botón flotante (FAB) con color verde Shopify&#10;- Rediseñado el footer con tonos grises y enlaces en verde Shopify&#10;- Modificado color de las tarjetas para evitar el blanco puro y armonizar con el fondo&#10;- Establecido cursor &quot;grab&quot; solo para tareas movibles; tareas activas bloquean drag con mensaje&#10;- Se evita mover tareas iniciadas y se avisa al usuario mediante alert&#10;- Al reiniciar una tarea, se aumenta el nivel de estrés (según nueva lógica emocional)&#10;- Barra de progreso ahora se mantiene al recargar la página (persistencia y precisión)&#10;- Tareas activas no pueden ser movidas de columna hasta finalizar&#10;- Código modular listo para extender a vistas tipo sticky, toast o alertas visuales&#10;&#10;Este commit mejora la coherencia visual, la accesibilidad emocional de la app y la UX de las tarjetas temporizadas bajo la filosofía Serie9.">
+      <created>1746797546970</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1746797546970</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat(ui): Agregado tutorial">
+      <created>1746805884915</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1746805884915</updated>
+    </task>
+    <task id="LOCAL-00007" summary="- Añadido sistema de journal y reflexiones filosóficas&#10;  - Nuevo modal de reflexión después de pausas&#10;  - Sistema de journal con múltiples tipos de entrada&#10;  - Prompts de reflexión personalizados por tipo de pausa&#10;  - Resumen semanal con estadísticas y mood tracking&#10;  - Exportación de journal a JSON&#10;&#10;- Reorganización de CSS en arquitectura modular&#10;  - Creada estructura styles/ con archivos separados&#10;  - base.css: variables y estilos globales&#10;  - layout.css: estructura principal&#10;  - components.css: componentes reutilizables&#10;  - kanban.css: tablero kanban y tarjetas&#10;  - modals.css: todos los modales&#10;  - navigation.css: navegación inferior&#10;  - heatmap.css: visualización de estrés&#10;  - journal.css: sistema de journal&#10;  - manifesto.css: página del manifiesto&#10;  - utilities.css: clases utilitarias&#10;&#10;- Corrección de alineación del tablero Kanban&#10;  - Ajustado justify-content a flex-start&#10;  - Añadido ancho fijo para columnas&#10;  - Mejorado responsive design&#10;&#10;- Implementación de 5 diseños de header alternativos&#10;  - Header v1: Enhanced con estadísticas y breathing indicator&#10;  - Header v2: Diseño Zen minimalista&#10;  - Header v3: Header progresivo con daily progress&#10;  - Header v4: Header interactivo basado en mood&#10;  - Header v5: Header ambient con efectos flotantes&#10;  - Añadido header-functions.js para interactividad&#10;&#10;- Actualización del breathing indicator&#10;  - Reemplazado círculo por emoji de pulmón animado 🫁&#10;  - Animación sincronizada con texto Inhalando/Exhalando&#10;  - Opciones de SVG y CSS puro como alternativas&#10;&#10;- Corrección del tracking de tiempo de enfoque&#10;  - Implementado totalFocusTime como variable global&#10;  - Añadido guardado automático en localStorage&#10;  - Actualización en tiempo real durante trabajo&#10;  - Fix para problema de &quot;0m&quot; en estadísticas&#10;&#10;- Creación de página de manifiesto expandido&#10;  - Nueva página manifiesto.html&#10;  - Explicación detallada de los 9 principios&#10;  - Filosofía del ritmo interior&#10;  - Prácticas de conciencia temporal&#10;&#10;- Implementación de sistema de entrada manual al journal&#10;  - Modal para crear entradas manualmente&#10;  - Botón de entrada rápida en navegación&#10;  - Selección de tipo de entrada y mood&#10;  - Sistema de quick entries con prompts&#10;&#10;Co-authored-by: AI Assistant &lt;claude@anthropic.com&gt;">
+      <created>1746906288140</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1746906288140</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value=" Nacimiento de Serie9&#10;&#10;Inicia Serie9, una app para reconectar con el ritmo natural: 27 minutos de enfoque, 9 minutos de pausa. &#10;Diseñada por humanos. Ejecutada por IA. &#10;Creamos tecnología que no solo mide el tiempo, sino que lo honra.&#10;&#10;Incluye:&#10;- Sistema de tareas con ciclos productivos y pausas conscientes&#10;- Heatmap de estrés diario&#10;- Notas por tarea&#10;- Modo respiración de 9 minutos&#10;- Persistencia local y soporte PWA&#10;- Filosofía y manifiesto Serie9" />
+    <MESSAGE value="Creado el build para chrome y los iconos, así como la edición del manifiesto" />
+    <MESSAGE value="✨ Rediseño visual tipo Jira + mejoras UX/UI estilo Shopify&#10;&#10;- Agregado sistema Kanban con títulos dinámicos por semana (Retrasado, Por Terminar, etc.)&#10;- Añadida barra de progreso en cada tarjeta según tiempo (27min productivo, 9min pausa)&#10;- Alerta automática al completar 3 tareas productivas para sugerir descanso&#10;- Reorganizados botones en tarjetas al estilo Jira (superior derecha, tamaño compacto)&#10;- Estilizado heatmap de estrés semanal con diseño cuadrado inspirado en GitHub/Shopify&#10;- Integrada fuente 'Inter' y tipografía moderna tipo Shopify&#10;- Añadidos sonidos al iniciar y finalizar tareas (startSound/endSound)" />
+    <MESSAGE value="feat(ui): Integración de estilo Shopify en interfaz Serie9&#10;&#10;- Aplicado esquema de color inspirado en Shopify:&#10;  - Fondo general: #f6f6f7&#10;  - Cards: #f9fafb (gris claro neutro)&#10;  - Elementos activos y acentos: verde Shopify #008060&#10;- Estilizada barra de navegación superior con color institucional y tipografía optimizada&#10;- Actualizado botón flotante (FAB) con color verde Shopify&#10;- Rediseñado el footer con tonos grises y enlaces en verde Shopify&#10;- Modificado color de las tarjetas para evitar el blanco puro y armonizar con el fondo&#10;- Establecido cursor &quot;grab&quot; solo para tareas movibles; tareas activas bloquean drag con mensaje&#10;- Se evita mover tareas iniciadas y se avisa al usuario mediante alert&#10;- Al reiniciar una tarea, se aumenta el nivel de estrés (según nueva lógica emocional)&#10;- Barra de progreso ahora se mantiene al recargar la página (persistencia y precisión)&#10;- Tareas activas no pueden ser movidas de columna hasta finalizar&#10;- Código modular listo para extender a vistas tipo sticky, toast o alertas visuales&#10;&#10;Este commit mejora la coherencia visual, la accesibilidad emocional de la app y la UX de las tarjetas temporizadas bajo la filosofía Serie9." />
+    <MESSAGE value="feat(ui): Agregado tutorial" />
+    <MESSAGE value="- Añadido sistema de journal y reflexiones filosóficas&#10;  - Nuevo modal de reflexión después de pausas&#10;  - Sistema de journal con múltiples tipos de entrada&#10;  - Prompts de reflexión personalizados por tipo de pausa&#10;  - Resumen semanal con estadísticas y mood tracking&#10;  - Exportación de journal a JSON&#10;&#10;- Reorganización de CSS en arquitectura modular&#10;  - Creada estructura styles/ con archivos separados&#10;  - base.css: variables y estilos globales&#10;  - layout.css: estructura principal&#10;  - components.css: componentes reutilizables&#10;  - kanban.css: tablero kanban y tarjetas&#10;  - modals.css: todos los modales&#10;  - navigation.css: navegación inferior&#10;  - heatmap.css: visualización de estrés&#10;  - journal.css: sistema de journal&#10;  - manifesto.css: página del manifiesto&#10;  - utilities.css: clases utilitarias&#10;&#10;- Corrección de alineación del tablero Kanban&#10;  - Ajustado justify-content a flex-start&#10;  - Añadido ancho fijo para columnas&#10;  - Mejorado responsive design&#10;&#10;- Implementación de 5 diseños de header alternativos&#10;  - Header v1: Enhanced con estadísticas y breathing indicator&#10;  - Header v2: Diseño Zen minimalista&#10;  - Header v3: Header progresivo con daily progress&#10;  - Header v4: Header interactivo basado en mood&#10;  - Header v5: Header ambient con efectos flotantes&#10;  - Añadido header-functions.js para interactividad&#10;&#10;- Actualización del breathing indicator&#10;  - Reemplazado círculo por emoji de pulmón animado &#10;  - Animación sincronizada con texto Inhalando/Exhalando&#10;  - Opciones de SVG y CSS puro como alternativas&#10;&#10;- Corrección del tracking de tiempo de enfoque&#10;  - Implementado totalFocusTime como variable global&#10;  - Añadido guardado automático en localStorage&#10;  - Actualización en tiempo real durante trabajo&#10;  - Fix para problema de &quot;0m&quot; en estadísticas&#10;&#10;- Creación de página de manifiesto expandido&#10;  - Nueva página manifiesto.html&#10;  - Explicación detallada de los 9 principios&#10;  - Filosofía del ritmo interior&#10;  - Prácticas de conciencia temporal&#10;&#10;- Implementación de sistema de entrada manual al journal&#10;  - Modal para crear entradas manualmente&#10;  - Botón de entrada rápida en navegación&#10;  - Selección de tipo de entrada y mood&#10;  - Sistema de quick entries con prompts&#10;&#10;Co-authored-by: AI Assistant &lt;claude@anthropic.com&gt;" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Añadido sistema de journal y reflexiones filosóficas&#10;  - Nuevo modal de reflexión después de pausas&#10;  - Sistema de journal con múltiples tipos de entrada&#10;  - Prompts de reflexión personalizados por tipo de pausa&#10;  - Resumen semanal con estadísticas y mood tracking&#10;  - Exportación de journal a JSON&#10;&#10;- Reorganización de CSS en arquitectura modular&#10;  - Creada estructura styles/ con archivos separados&#10;  - base.css: variables y estilos globales&#10;  - layout.css: estructura principal&#10;  - components.css: componentes reutilizables&#10;  - kanban.css: tablero kanban y tarjetas&#10;  - modals.css: todos los modales&#10;  - navigation.css: navegación inferior&#10;  - heatmap.css: visualización de estrés&#10;  - journal.css: sistema de journal&#10;  - manifesto.css: página del manifiesto&#10;  - utilities.css: clases utilitarias&#10;&#10;- Corrección de alineación del tablero Kanban&#10;  - Ajustado justify-content a flex-start&#10;  - Añadido ancho fijo para columnas&#10;  - Mejorado responsive design&#10;&#10;- Implementación de 5 diseños de header alternativos&#10;  - Header v1: Enhanced con estadísticas y breathing indicator&#10;  - Header v2: Diseño Zen minimalista&#10;  - Header v3: Header progresivo con daily progress&#10;  - Header v4: Header interactivo basado en mood&#10;  - Header v5: Header ambient con efectos flotantes&#10;  - Añadido header-functions.js para interactividad&#10;&#10;- Actualización del breathing indicator&#10;  - Reemplazado círculo por emoji de pulmón animado &#10;  - Animación sincronizada con texto Inhalando/Exhalando&#10;  - Opciones de SVG y CSS puro como alternativas&#10;&#10;- Corrección del tracking de tiempo de enfoque&#10;  - Implementado totalFocusTime como variable global&#10;  - Añadido guardado automático en localStorage&#10;  - Actualización en tiempo real durante trabajo&#10;  - Fix para problema de &quot;0m&quot; en estadísticas&#10;&#10;- Creación de página de manifiesto expandido&#10;  - Nueva página manifiesto.html&#10;  - Explicación detallada de los 9 principios&#10;  - Filosofía del ritmo interior&#10;  - Prácticas de conciencia temporal&#10;&#10;- Implementación de sistema de entrada manual al journal&#10;  - Modal para crear entradas manualmente&#10;  - Botón de entrada rápida en navegación&#10;  - Selección de tipo de entrada y mood&#10;  - Sistema de quick entries con prompts&#10;&#10;Co-authored-by: AI Assistant &lt;claude@anthropic.com&gt;" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/script.js</url>
+          <line>510</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
