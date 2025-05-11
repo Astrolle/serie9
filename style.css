@@ -4,17 +4,21 @@
 */
 
 /* Import all CSS modules */
-@import url('styles/base.css');
-@import url('styles/layout.css');
-@import url('styles/components.css');
-@import url('styles/kanban.css');
-@import url('styles/modals.css');
-@import url('styles/navigation.css');
-@import url('styles/heatmap.css');
-@import url('styles/journal.css');
-@import url('styles/manifesto.css');
-@import url('styles/utilities.css');
-@import url('styles/header.css');
+@import url('./styles/base.css');
+@import url('./styles/layout.css');
+@import url('./styles/components.css');
+@import url('./styles/kanban.css');
+@import url('./styles/modals.css');
+@import url('./styles/navigation.css');
+@import url('./styles/heatmap.css');
+@import url('./styles/journal.css');
+@import url('./styles/manifesto.css');
+@import url('./styles/utilities.css');
+@import url('./styles/header.css');
+@import url('./styles/privacy.css');
+@import url('./styles/dreams.manager.css');
+@import url('./styles/dayly.dream.css');
+
 
 
 /*
