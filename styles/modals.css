@@ -1,4 +1,4 @@
-/* Serie9 Modals - All modal-related styles */
+/* Serie9 Modals - All modal-related styles (Apple-inspired) */
 
 /* Base Modal */
 .modal {
@@ -10,21 +10,42 @@
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 .modal-content {
     background-color: var(--white);
     margin: 10% auto;
-    padding: 30px;
-    border-radius: 14px;
+    padding: 32px;
+    border-radius: 16px;
     width: 90%;
     max-width: 420px;
     box-shadow: var(--modal-shadow);
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 18px;
     position: relative;
+    animation: modal-slide-up 0.3s ease-out;
+}
+
+@keyframes modal-slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-content h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--text-primary);
 }
 
 /* Task Modal */
@@ -34,6 +55,8 @@
 
 #pauseOptions {
     margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-color);
 }
 
 /* Rhythm Modal */
@@ -42,10 +65,12 @@
 }
 
 #rhythmTimer {
-    font-size: 3rem;
-    font-weight: bold;
+    font-size: 3.5rem;
+    font-weight: 700;
     color: var(--primary-color);
-    margin: 20px 0;
+    margin: 24px 0;
+    letter-spacing: -0.03em;
+    font-feature-settings: "tnum";
 }
 
 /* Calendar Heatmap Modal */
@@ -63,8 +88,8 @@
     font-size: 1.3rem;
     font-weight: 500;
     color: var(--text-primary);
-    margin-bottom: 24px;
-    line-height: 1.5;
+    margin-bottom: 30px;
+    line-height: 1.4;
     text-align: center;
     font-style: italic;
 }
@@ -94,7 +119,7 @@
 /* Journal Entry Modal */
 .journal-entry-modal {
     max-width: 500px;
-    padding: 30px;
+    padding: 36px;
 }
 
 /* Responsive */
@@ -102,7 +127,7 @@
     .modal-content {
         width: 95%;
         margin: 5% auto;
-        padding: 24px;
+        padding: 28px;
     }
 
     .reflection-modal,
@@ -111,7 +136,7 @@
     .journal-entry-modal {
         width: 95%;
         margin: 5% auto;
-        padding: 20px;
+        padding: 24px;
     }
 
     #journalModal h2 {

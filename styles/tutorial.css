@@ -1,4 +1,4 @@
-/* Estilos para el tutorial interactivo de Serie9 */
+/* Serie9 Tutorial - Estilos para el tutorial interactivo (Apple-inspired) */
 
 /* Overlay principal */
 #tutorial-overlay {
@@ -7,32 +7,37 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.6);
     z-index: 9000;
     pointer-events: none;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
 }
 
 /* Resaltado de elemento */
 .tutorial-highlight {
     position: absolute;
-    box-shadow: 0 0 0 9999px rgba(0,0,0,0.65);
-    border-radius: 4px;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.75);
+    border-radius: 8px;
     z-index: 9001;
     pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Tooltip del tutorial */
 .tutorial-tooltip {
     position: absolute;
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 16px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    width: 300px;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 320px;
     z-index: 9002;
     pointer-events: all;
-    font-family: 'Inter', sans-serif;
-    animation: tooltip-appear 0.3s ease-out;
+    font-family: var(--font-primary);
+    animation: tooltip-appear 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes tooltip-appear {
@@ -41,15 +46,17 @@
 }
 
 .tutorial-tooltip h3 {
-    margin: 0 0 8px 0;
-    color: #008060;
-    font-size: 18px;
+    margin: 0 0 10px 0;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
 }
 
 .tutorial-tooltip p {
-    margin: 0 0 16px 0;
-    color: #212b36;
-    font-size: 14px;
+    margin: 0 0 20px 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
     line-height: 1.5;
 }
 
@@ -60,29 +67,30 @@
 }
 
 .tutorial-btn {
-    background-color: #008060;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     padding: 8px 16px;
-    border-radius: 4px;
+    border-radius: 980px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 0.9rem;
     font-weight: 500;
-    transition: background-color 0.2s;
+    transition: all 0.2s ease;
 }
 
 .tutorial-btn:hover {
-    background-color: #006e52;
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
 }
 
 .tutorial-btn-secondary {
     background-color: transparent;
-    color: #637381;
-    border: 1px solid #dfe3e8;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
 }
 
 .tutorial-btn-secondary:hover {
-    background-color: #f9fafb;
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 /* Desactivar interacciones durante el tutorial */
@@ -94,13 +102,13 @@
 
 /* Animación de pulso para resaltar */
 .pulse-animation {
-    animation: pulse-tutorial 2s infinite;
+    animation: pulse-tutorial 2s infinite cubic-bezier(0.455, 0.03, 0.515, 0.955);
 }
 
 @keyframes pulse-tutorial {
-    0% { box-shadow: 0 0 0 0 rgba(0, 128, 96, 0.7), 0 0 0 9999px rgba(0,0,0,0.65); }
-    70% { box-shadow: 0 0 0 10px rgba(0, 128, 96, 0), 0 0 0 9999px rgba(0,0,0,0.65); }
-    100% { box-shadow: 0 0 0 0 rgba(0, 128, 96, 0), 0 0 0 9999px rgba(0,0,0,0.65); }
+    0% { box-shadow: 0 0 0 0 rgba(0, 113, 227, 0.7), 0 0 0 9999px rgba(0,0,0,0.75); }
+    70% { box-shadow: 0 0 0 10px rgba(0, 113, 227, 0), 0 0 0 9999px rgba(0,0,0,0.75); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 113, 227, 0), 0 0 0 9999px rgba(0,0,0,0.75); }
 }
 
 /* Animaciones para toast */
@@ -120,38 +128,60 @@
     bottom: 80px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #008060;
+    background-color: rgba(0, 0, 0, 0.8);
     color: white;
-    padding: 12px 24px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 16px 24px;
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     z-index: 9999;
-    font-family: 'Inter', sans-serif;
-    animation: toast-appear 0.3s ease-out;
+    font-family: var(--font-primary);
+    animation: toast-appear 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    max-width: 320px;
 }
 
 /* Botón de reiniciar tutorial */
 .restart-tutorial-btn {
     display: block;
     width: 100%;
-    padding: 10px;
-    margin-top: 20px;
-    background-color: #f9fafb;
-    border: 1px solid #dfe3e8;
-    border-radius: 8px;
-    color: #008060;
+    padding: 12px;
+    margin-top: 24px;
+    background-color: rgba(0, 0, 0, 0.02);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    color: var(--primary-color);
     font-weight: 500;
     text-align: center;
     cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
+    transition: all 0.2s ease;
 }
 
 .restart-tutorial-btn:hover {
-    background-color: #f4f6f8;
-    color: #006e52;
+    background-color: rgba(0, 113, 227, 0.05);
+    color: var(--primary-hover);
+    border-color: var(--primary-color);
 }
 
 .restart-tutorial-btn svg {
     margin-right: 6px;
     vertical-align: middle;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .tutorial-tooltip {
+        width: 90%;
+        max-width: 300px;
+        padding: 16px;
+    }
+
+    .tutorial-tooltip h3 {
+        font-size: 1rem;
+    }
+
+    .tutorial-tooltip p {
+        font-size: 0.9rem;
+        margin-bottom: 16px;
+    }
 }

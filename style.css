@@ -1,7 +1,10 @@
-/* Serie9 Main Stylesheet
+/* Serie9 Main Stylesheet (Apple-inspired)
    This file imports all the modular CSS files
-   Version: 1.1.0
+   Version: 2.0.0
 */
+
+/* Importar fuentes (SF Pro Display o equivalent) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* Import all CSS modules */
 @import url('./styles/base.css');
@@ -19,19 +22,94 @@
 @import url('./styles/dreams.manager.css');
 @import url('./styles/dayly.dream.css');
 
+/* Estilos globales para el tema Apple-inspired */
+:root {
+    --font-smooth: antialiased;
+    --transition-ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
 
+body {
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #f5f5f7;
+}
 
-/*
-   Directory structure:
-   - styles/
-     - base.css          # Global styles, typography, variables
-     - layout.css        # Header, footer, main structure
-     - components.css    # Reusable components (buttons, cards)
-     - kanban.css        # Kanban board and task cards
-     - modals.css        # All modal styles
-     - navigation.css    # Bottom navigation and nav buttons
-     - heatmap.css       # Heatmap and stress visualization
-     - journal.css       # Journal system styles
-     - manifesto.css     # Manifesto page styles
-     - utilities.css     # Utility classes and animations
-*/
+/* Mejoras globales para elementos interactivos */
+button, a {
+    transition: all 0.2s var(--transition-ease);
+}
+
+/* Mejoras de accesibilidad para el foco */
+*:focus {
+    outline: none;
+}
+
+*:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Mejoras visuales para scrollbars */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* Animaciones suaves */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s var(--transition-ease);
+}
+
+/* Soporte para modo oscuro */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-color: #0a84ff;
+        --primary-hover: #409cff;
+        --secondary-color: #98989d;
+        --background-color: #1c1c1e;
+        --white: #2c2c2e;
+        --text-primary: #ffffff;
+        --text-secondary: #98989d;
+        --border-color: #38383a;
+        --light-gray: #2c2c2e;
+        --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        --modal-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    body {
+        background-color: #1c1c1e;
+        color: #ffffff;
+    }
+
+    .modal {
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
+}

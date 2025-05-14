@@ -1,4 +1,4 @@
-/* Serie9 Layout Styles - Header, footer, and main structure (Fixed grid system) */
+/* Serie9 Layout Styles - Header, footer, and main structure (Apple-inspired) */
 
 /* Reset box-sizing */
 *,
@@ -10,14 +10,16 @@
 /* App Container */
 .app {
     width: 100%;
-    padding: 24px;
+    padding: 28px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 /* Container fluid for full width */
 .container-fluid {
     width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
+    padding-right: 24px;
+    padding-left: 24px;
     margin-right: auto;
     margin-left: auto;
 }
@@ -52,48 +54,64 @@
     }
 }
 
-/* Header */
-header {
-    background-color: var(--primary-color);
-    color: var(--white);
-    padding: 12px 20px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
-    border-bottom: 1px solid var(--primary-hover);
-}
-
-header h1 {
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: var(--white);
-    margin: 0;
-}
-
-header .d-flex {
-    align-items: center;
-    gap: 12px;
-}
-
-.header-light {
-    background-color: var(--background-color);
-    color: var(--text-primary);
-    border-bottom: 1px solid var(--border-color);
-}
-
 /* Main Content */
 main {
-    min-height: calc(100vh - 120px);
+    min-height: calc(100vh - 160px);
     padding-bottom: 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Content Section */
+.content-section {
+    padding: 24px 0;
+}
+
+/* Wide layout for specific pages */
+.wide-layout {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 24px;
+}
+
+/* Narrow layout for text-focused pages */
+.narrow-layout {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 24px;
+}
+
+/* Grid container */
+.grid-container {
+    display: grid;
+    gap: 24px;
+}
+
+/* Two column grid */
+.two-column-grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+/* Three column grid */
+.three-column-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* Four column grid */
+.four-column-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
 /* Footer */
 footer.serie9-disclaimer {
     background-color: var(--background-color);
-    padding: 40px 20px;
-    font-size: 0.75rem;
+    padding: 40px 24px;
+    font-size: 0.8rem;
     color: var(--text-secondary);
     border-top: 1px solid var(--border-color);
     max-width: 960px;
-    margin: 40px auto 0 auto;
+    margin: 40px auto 80px auto;
+    line-height: 1.6;
 }
 
 footer.serie9-disclaimer a {
@@ -103,6 +121,20 @@ footer.serie9-disclaimer a {
 
 footer.serie9-disclaimer a:hover {
     color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+footer.serie9-disclaimer p {
+    margin-bottom: 16px;
+}
+
+footer.serie9-disclaimer ul {
+    margin: 16px 0;
+    padding-left: 20px;
+}
+
+footer.serie9-disclaimer li {
+    margin-bottom: 8px;
 }
 
 /* Loading Screen */
@@ -120,14 +152,41 @@ footer.serie9-disclaimer a:hover {
 }
 
 .loading-logo {
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: bold;
-    color: #1a1a1a;
-    animation: pulse 2.4s infinite ease-in-out;
+    color: var(--primary-color);
+    animation: gentle-pulse 2s infinite cubic-bezier(0.455, 0.03, 0.515, 0.955);
 }
 
 .loading-message {
-    font-size: 1rem;
-    color: #666;
-    margin-top: 10px;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-top: 16px;
+    font-weight: 500;
+}
+
+@keyframes gentle-pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+}
+
+/* Responsive Helpers */
+.hide-mobile {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .hide-mobile {
+        display: block;
+    }
+
+    .hide-desktop {
+        display: none;
+    }
 }

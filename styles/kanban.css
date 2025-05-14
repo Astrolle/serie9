@@ -1,79 +1,150 @@
-/* Serie9 Kanban - Kanban board and task card styles (Fixed alignment) */
+/* Serie9 Kanban - Columnas distribuidas al 100% del ancho */
 
-/* Kanban Board */
+/* Kanban Board - 100% ancho */
 .kanban-board {
     display: flex;
-    gap: 20px;
-    justify-content: flex-start; /* Changed from space-between */
-    flex-wrap: nowrap;
+    justify-content: space-between; /* Distribuir el espacio uniformemente */
     overflow-x: auto;
-    padding-bottom: 12px;
-    width: 100%;
-    margin: 0 -15px; /* Negative margin to offset column padding */
-    min-height: 600px; /* Añadido: altura mínima para que se vean más alargadas */
+    padding-bottom: 16px;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 8px;
+    min-height: 600px;
+    scrollbar-width: thin;
+    position: relative;
+    scroll-padding-left: 20px;
+    gap: 0; /* Eliminar gap para maximizar espacio de columnas */
 }
 
-/* Columns */
+/* Mejorar comportamiento de scroll */
+.kanban-board::-webkit-scrollbar {
+    height: 6px;
+}
+
+.kanban-board::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.kanban-board::-webkit-scrollbar-thumb {
+    background-color: var(--text-secondary);
+    border-radius: 20px;
+    opacity: 0.5;
+}
+
+/* Columnas con ancho flexible y distribuido */
 .column {
     background-color: var(--white);
-    padding: 16px;
-    border-radius: 8px;
-    width: 25%; /* Fixed width for all columns */
-    min-width: 260px;
-    max-width: 320px; /* Maximum width to prevent too wide columns */
-    box-shadow: inset 0 0 0 1px var(--border-color);
+    padding: 18px;
+    border-radius: 14px;
+    flex: 1; /* Hacer que todas las columnas crezcan proporcionalmente */
+    min-width: 0; /* Permitir que las columnas se encogan si es necesario */
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
     display: flex;
     flex-direction: column;
-    flex-shrink: 0; /* Prevent columns from shrinking */
-    min-height: 550px; /* Añadido: altura mínima para las columnas */
-    max-height: 80vh; /* Añadido: altura máxima relativa al viewport */
-    overflow-y: auto; /* Añadido: scroll vertical si hay muchas tareas */
-    position: relative; /* Añadido: para posicionamiento de elementos internos */
+    min-height: 550px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    scrollbar-width: thin;
+    margin: 0 10px; /* Añadir margen horizontal para separación */
+}
+
+/* Comportamiento responsivo */
+@media (max-width: 1200px) {
+    .kanban-board {
+        justify-content: flex-start; /* Cambiar a flex-start en pantallas pequeñas */
+        gap: 20px; /* Restaurar gap en pantallas pequeñas */
+    }
+
+    .column {
+        flex: 0 0 300px; /* Ancho fijo en pantallas pequeñas */
+        margin: 0; /* Quitar márgenes para usar gap */
+    }
+}
+
+@media (max-width: 768px) {
+    .kanban-board {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .column {
+        flex: 0 0 260px;
+    }
+}
+
+/* El resto de las reglas de kanban.css se mantienen igual */
+.column::-webkit-scrollbar {
+    width: 5px;
+}
+
+.column::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.column::-webkit-scrollbar-thumb {
+    background-color: var(--text-secondary);
+    border-radius: 20px;
+    opacity: 0.5;
 }
 
 /* Waiting Column - Special styling */
 #waitingColumn {
-    background-color: var(--light-gray);
-    border: 1px dashed #c1c7d0;
+    background-color: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 /* Column Title */
 .column h3 {
-    margin-bottom: 16px;
-    font-size: 1rem;
-    color: var(--text-primary);
-    min-height: 48px; /* Ensure consistent height for titles */
-    position: sticky; /* Añadido: título pegajoso al hacer scroll */
-    top: 0; /* Añadido: posición del título pegajoso */
-    background-color: inherit; /* Añadido: fondo para el título pegajoso */
-    z-index: 1; /* Añadido: z-index para el título pegajoso */
-    padding-bottom: 8px; /* Añadido: espacio inferior para el título */
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    min-height: 48px;
+    position: sticky;
+    top: 0;
+    background-color: inherit;
+    z-index: 1;
+    padding-bottom: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 /* Task Cards */
 .task-card {
-    background-color: var(--background-color);
-    border-left: 4px solid var(--border-color);
-    border-radius: 8px;
-    padding: 12px;
-    margin-bottom: 12px;
-    box-shadow: var(--card-shadow);
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
     font-size: 0.95rem;
     color: var(--text-primary);
-    flex-shrink: 0; /* Añadido: evitar que las tarjetas se compriman */
+    flex-shrink: 0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.task-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .task-card .task-info {
-    margin-top: 8px;
+    margin-top: 10px;
 }
 
 .task-card span {
     display: block;
     font-weight: 600;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
 }
 
 /* Task Header Layout */
@@ -86,7 +157,7 @@
 /* Task Buttons */
 .task-buttons {
     display: flex;
-    gap: 4px;
+    gap: 6px;
     align-items: center;
     flex-shrink: 0;
 }
@@ -96,26 +167,28 @@
     border: none;
     color: var(--text-secondary);
     font-size: 0.8rem;
-    padding: 2px 6px;
+    padding: 4px 8px;
     cursor: pointer;
-    transition: color 0.2s ease;
+    transition: color 0.2s ease, background-color 0.2s ease;
+    border-radius: 4px;
 }
 
 .task-buttons button:hover {
     color: var(--text-primary);
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 /* Progress Bar */
 .task-card .progress {
-    height: 6px;
-    background-color: #e0e0e0;
+    height: 4px;
+    background-color: rgba(0, 0, 0, 0.05);
     border-radius: 4px;
     overflow: hidden;
-    margin-top: 8px;
+    margin-top: 10px;
 }
 
 .task-card .progress-bar {
-    height: 6px;
+    height: 4px;
     background-color: var(--primary-color);
     width: 0%;
     transition: width 0.5s ease;
@@ -123,28 +196,28 @@
 
 /* Task Types */
 .task-productive {
-    border-left-color: var(--primary-color);
+    border-left: 3px solid var(--primary-color);
 }
 
 /* Pause Types */
 .task-pause.read {
-    border-left-color: #5c6ac4;
-    background-color: #f4f5fa;
+    border-left: 3px solid #5E97F6;
+    background-color: rgba(94, 151, 246, 0.05);
 }
 
 .task-pause.breathe {
-    border-left-color: #008060;
-    background-color: #e3f1e9;
+    border-left: 3px solid #34C759;
+    background-color: rgba(52, 199, 89, 0.05);
 }
 
 .task-pause.think {
-    border-left-color: #9c6ade;
-    background-color: #f3e8f9;
+    border-left: 3px solid #AF52DE;
+    background-color: rgba(175, 82, 222, 0.05);
 }
 
 .task-pause.meditate {
-    border-left-color: #eec200;
-    background-color: #fffbe8;
+    border-left: 3px solid #FF9500;
+    background-color: rgba(255, 149, 0, 0.05);
 }
 
 /* Drag States */
@@ -157,7 +230,7 @@
     opacity: 0.95;
 }
 
-/* Empty column state - Añadido: para indicar columnas vacías */
+/* Empty column state */
 .column:empty::after {
     content: 'Arrastra tareas aquí';
     position: absolute;
@@ -167,30 +240,5 @@
     color: var(--text-secondary);
     font-style: italic;
     opacity: 0.5;
-}
-
-/* Responsive Design */
-@media (max-width: 1200px) {
-    .column {
-        width: calc(25% - 15px);
-        min-width: 240px;
-        min-height: 500px; /* Altura mínima ajustada para pantallas medianas */
-    }
-}
-
-@media (max-width: 768px) {
-    .kanban-board {
-        overflow-x: scroll;
-        margin: 0;
-        padding: 0 10px;
-        gap: 10px;
-        min-height: 450px; /* Altura mínima ajustada para móviles */
-    }
-
-    .column {
-        width: 280px;
-        min-width: 280px;
-        max-width: none;
-        min-height: 400px; /* Altura mínima ajustada para móviles */
-    }
+    font-size: 0.9rem;
 }

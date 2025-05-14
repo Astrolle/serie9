@@ -1,49 +1,420 @@
-/* Serie9 Privacy Policy - Privacy page specific styles */
+/* Serie9 Daily Dreams - Estilos para el sistema de tareas diarias (Apple-inspired) */
 
-/* Privacy specific container */
-.privacy-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 40px 20px;
+/* Badge de tarea diaria */
+.daily-badge {
+    display: inline-block;
+    background-color: #ffd60a;
+    color: #000;
+    font-size: 0.7rem;
+    padding: 3px 8px;
+    border-radius: 10px;
+    margin-left: 8px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+/* Tarjeta de tarea diaria */
+.daily-dream-task {
+    position: relative;
+    box-shadow: 0 4px 16px rgba(255, 214, 10, 0.15);
+    border-color: rgba(255, 214, 10, 0.3);
+}
+
+.daily-dream-task::before {
+    content: '📅';
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    font-size: 1.2rem;
+    z-index: 1;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Sección de progreso diario */
+.daily-progress-section {
     background-color: var(--white);
-    box-shadow: var(--card-shadow);
+    padding: 28px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    margin-bottom: 28px;
 }
 
-/* Privacy highlight section */
-.privacy-highlight {
-    background-color: #e3f1e9;
-    padding: 20px;
-    border-radius: 8px;
-    margin: 20px 0;
+.daily-header-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-/* Privacy contact section */
-.privacy-contact {
-    background-color: var(--background-color);
-    padding: 20px;
-    border-radius: 8px;
-    margin-top: 30px;
+.daily-header-controls h3 {
+    color: var(--text-primary);
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-/* Privacy date/version info */
-.privacy-date {
+.daily-header-controls .btn-secondary {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    border-radius: 980px;
+    background: none;
+    border: 1px solid var(--border-color);
     color: var(--text-secondary);
-    font-style: italic;
-    margin-top: 40px;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.daily-header-controls .btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Grid de progreso diario */
+.daily-progress-grid {
+    display: grid;
+    gap: 24px;
+}
+
+/* Tarjeta de resumen diario */
+.daily-summary-card {
+    background-color: var(--white);
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.daily-summary-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.summary-header h4 {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.summary-progress {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 980px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Barra de progreso del resumen */
+.summary-bar {
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.summary-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), #5ac8fa);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+/* Rachas del resumen */
+.summary-streaks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.streak-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background-color: rgba(0, 0, 0, 0.02);
+    border-radius: 980px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.streak-item.completed {
+    background-color: rgba(52, 199, 89, 0.1);
+    box-shadow: 0 2px 8px rgba(52, 199, 89, 0.15);
+    color: #34c759;
+}
+
+.streak-item.pending {
+    opacity: 0.7;
+    border: 1px dashed var(--border-color);
+}
+
+/* Modal de balance de sueño */
+.dream-balance-modal {
+    max-width: 600px;
+    padding: 32px;
+}
+
+.dream-balance-modal h2 {
+    margin-top: 0;
+    margin-bottom: 24px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Estadísticas de balance */
+.balance-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 36px;
+}
+
+.balance-stat {
     text-align: center;
+    padding: 24px;
+    background-color: rgba(0, 0, 0, 0.02);
+    border-radius: 16px;
+    transition: transform 0.3s ease;
 }
 
-/* Privacy specific heading adjustments */
-.privacy-container h2 {
-    margin-top: 30px;
-    margin-bottom: 15px;
+.balance-stat:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
 }
 
-/* Privacy specific list styling */
-.privacy-container ul {
-    margin: 15px 0;
+.stat-icon {
+    display: block;
+    font-size: 2.2rem;
+    margin-bottom: 12px;
 }
 
-.privacy-container li {
-    margin-bottom: 10px;
+.balance-stat .stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.balance-stat .stat-label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+/* Calendario de balance */
+.balance-calendar {
+    margin-bottom: 36px;
+}
+
+.balance-calendar h3 {
+    margin-bottom: 20px;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    cursor: default;
+    font-weight: 500;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.calendar-day:hover {
+    transform: scale(1.05);
+    z-index: 1;
+}
+
+.calendar-day.completed {
+    background-color: #34c759;
+    color: white;
+}
+
+.calendar-day.failed {
+    background-color: #ff3b30;
+    color: white;
+}
+
+.calendar-day.no-data {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: var(--text-secondary);
+}
+
+/* Insights de balance */
+.balance-insights {
+    margin-bottom: 28px;
+}
+
+.balance-insights h3 {
+    margin-bottom: 20px;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.balance-insights p {
+    margin-bottom: 16px;
+    padding: 16px;
+    background-color: rgba(0, 0, 0, 0.02);
+    border-radius: 12px;
+    border-left: 3px solid var(--primary-color);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+/* Toast de completado diario */
+.daily-completion-toast {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    padding: 20px 24px;
+    z-index: 9999;
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    max-width: 320px;
+    color: white;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translate(-50%, 100%);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.toast-icon {
+    font-size: 2.2rem;
+}
+
+.toast-text strong {
+    display: block;
+    color: white;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.toast-text p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+}
+
+/* Indicadores de racha */
+.streak-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background-color: #ffd60a;
+    color: #000;
+    padding: 4px 10px;
+    border-radius: 980px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(255, 214, 10, 0.3);
+}
+
+/* Animaciones */
+.fade-out {
+    animation: fadeOut 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+    to {
+        opacity: 0;
+        transform: translate(-50%, 20px);
+    }
+}
+
+/* Estados de tarea diaria */
+.daily-dream-task[data-completed="true"] {
+    opacity: 0.9;
+    background-color: rgba(52, 199, 89, 0.05) !important;
+}
+
+.daily-dream-task[data-completed="true"] .timer {
+    color: #34c759;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .balance-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .summary-header {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+
+    .summary-streaks {
+        justify-content: center;
+    }
+
+    .calendar-grid {
+        gap: 4px;
+    }
+
+    .calendar-day {
+        font-size: 0.7rem;
+    }
+
+    .daily-completion-toast {
+        bottom: 80px;
+        width: 90%;
+    }
+
+    .daily-progress-section {
+        padding: 20px;
+    }
 }

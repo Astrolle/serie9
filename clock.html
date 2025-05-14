@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Serie9: Tiempos para Crear y Detenerse</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="manifest" href="./manifest.json" />
+    <meta name="theme-color" content="#0071e3" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/tutorial.css" />
+</head>
+<body>
+
+<!-- 🌐 Loading Serie9 -->
+<div id="loadingScreen" class="loading-screen">
+    <div class="loading-logo">∞∙9</div>
+    <div class="loading-message">Diseñado por humanos. Ejecutado por IA.</div>
+</div>
+
+<!-- Header con estilo Apple -->
+<header class="serie9-header">
+    <div class="header-container">
+        <div class="logo-container">
+            <div class="logo-symbol">∞∙9</div>
+            <div class="logo-text">
+                <h1>Tiempos para Crear y Detenerse</h1>
+                <p class="tagline">Respira. Crea. Repite.</p>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="breathing-indicator">
+                <div class="lung-svg-container">
+                    <svg class="lung-svg" viewBox="0 0 100 100" width="40" height="40">
+                        <g class="left-lung">
+                            <path d="M30 20 Q15 20 10 40 T25 80 Q30 85 40 75 Q45 60 40 40 Q35 20 30 20"
+                                  fill="#ff7b7b" stroke="#ff5555" stroke-width="2"/>
+                        </g>
+                        <g class="right-lung">
+                            <path d="M70 20 Q85 20 90 40 T75 80 Q70 85 60 75 Q55 60 60 40 Q65 20 70 20"
+                                  fill="#ff7b7b" stroke="#ff5555" stroke-width="2"/>
+                        </g>
+                        <g class="trachea">
+                            <path d="M50 10 L50 30 M50 30 Q45 35 40 40 M50 30 Q55 35 60 40"
+                                  fill="none" stroke="#ff5555" stroke-width="3" stroke-linecap="round"/>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="user-stats">
+                <div class="stat-item">
+                    <span class="stat-value">3</span>
+                    <span class="stat-label">Ciclos hoy</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">27m</span>
+                    <span class="stat-label">Enfoque total</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<main>
+    <!-- 🌀 Termómetro de ritmo interior -->
+    <div class="container">
+        <div class="heatmap-section mb-4">
+            <h3>Termómetro de ritmo interior</h3>
+            <div id="stressHeatmap" class="heatmap-grid"></div>
+            <div class="heatmap-legend">
+                <div class="legend-item">
+                    <div class="legend-color legend-color-0"></div>
+                    <span>Sin datos</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-color-1"></div>
+                    <span>Óptimo</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-color-2"></div>
+                    <span>Normal</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-color-3"></div>
+                    <span>Elevado</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-color-4"></div>
+                    <span>Alto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 📅 Ciclos de intención - 100% ancho con scroll lateral cuando sea necesario -->
+    <div id="kanbanBoard" class="kanban-board">
+        <div class="column" id="waitingColumn" ondragover="allowDrop(event)" ondrop="drop(event)">
+            <h3>Ideas que aguardan su momento</h3>
+            <label for="limitSelector" class="label-small">¿Cuántos latidos antes de respirar?</label>
+            <input type="number" id="limitSelector" min="1" max="10" value="3" />
+        </div>
+        <!-- Columnas semanales desde JS -->
+    </div>
+</main>
+
+<!-- ➕ Botón flotante para propósito -->
+<button class="fab" onclick="openModal()">+</button>
+
+<!-- 📝 Modal para anotar un propósito -->
+<div id="taskModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">×</span>
+        <h2>Anotar un propósito</h2>
+        <input type="text" id="taskInput" class="form-control" placeholder="¿Qué quieres enfocar o pausar?" />
+        <select id="taskType" class="form-select" onchange="toggleSubcategory()">
+            <option value="productive">Foco total – 27 minutos contigo</option>
+            <option value="pause">Pausa sagrada – 9 minutos de reconexión</option>
+        </select>
+        <div id="pauseOptions" style="display: none">
+            <label for="pauseType">Sugerencias de pausa:</label>
+            <select id="pauseType" class="form-select">
+                <option value="Pensar">Pensar en silencio</option>
+                <option value="Leer">Leer lento</option>
+                <option value="Respirar">Respirar con intención</option>
+                <option value="Meditar">Meditar y soltar</option>
+            </select>
+            <input type="text" id="customPauseInput" class="form-control mt-2" placeholder="O define tu forma de pausar..." />
+        </div>
+        <button class="btn btn-primary mt-3" onclick="addTask(); closeModal()">Guardar propósito</button>
+    </div>
+</div>
+
+<!-- 📱 Navegación inferior estilo iOS -->
+<nav class="bottom-nav">
+    <button class="nav-btn active" onclick="openCalendarHeatmap()">
+        <span>Agenda</span>
+    </button>
+    <button class="nav-btn" onclick="openRhythmModal()">
+        <span>Ritmo</span>
+    </button>
+    <button class="nav-btn" onclick="showAllNotes()">
+        <span>Notas</span>
+    </button>
+    <button class="nav-btn" onclick="openManifestSidebar()">
+        <span>Más</span>
+    </button>
+</nav>
+<!-- 📝 Sidebar de Notas Productivas -->
+<div id="notesSidebar" class="notes-sidebar hidden">
+    <div class="notes-header">
+        <span id="notesSidebarTitle">Mis notas de enfoque</span>
+        <button class="close" onclick="closeNotes()">✕</button>
+    </div>
+    <textarea id="notesTextarea" style="display: none" placeholder="Escribe tus ideas…"></textarea>
+    <button id="saveNoteBtn" style="display: none" onclick="saveNote()">Guardar nota</button>
+    <div id="notesList" style="display: flex; flex-direction: column; gap: 12px;"></div>
+</div>
+
+<!-- Footer -->
+<footer class="serie9-disclaimer">
+    <p>
+        Version 2.0.0
+    </p>
+    <p>
+        Este proyecto fue <strong>diseñado por humanos</strong> y <strong>creado junto a inteligencia artificial</strong>. El código fuente, diseño e ideas detrás de <strong>serie9.club</strong> están publicados bajo licencias abiertas: <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GPL-3.0</a> y <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">Creative Commons BY-NC-SA 4.0</a>.
+    </p>
+
+    <p>
+        Esto significa que cualquier persona puede <strong>estudiar, modificar y distribuir</strong> el código, preferiblemente con el apoyo de IA, aunque también mediante intervención humana. Se permite la creación de versiones derivadas, siempre y cuando:
+    </p>
+
+    <ul>
+        <li>Se conserve la atribución a <strong>serie9.club</strong>.</li>
+        <li>No se utilice con fines comerciales directos (sin autorización).</li>
+        <li>Las modificaciones también se publiquen bajo las mismas licencias.</li>
+    </ul>
+
+    <p>
+        No está permitido <strong>revender este software ni sus derivados</strong> de forma cerrada o privada. Este proyecto busca <strong>honrar el tiempo, fomentar el ritmo interior y construir tecnología desde la conciencia colectiva</strong>. El código puede ser modificado libremente, pero toda redistribución debe ser con espíritu de apertura y bajo el nombre de <strong>Serie9</strong>.
+    </p>
+
+    <p>
+        Cualquier uso que implique integración comercial o institucional debe ser consensuado previamente con el equipo original de Astrolle Inc.
+    </p>
+</footer>
+
+
+<!-- 🌬️ Modal Ritmo - Respiración Serie9 -->
+<div id="rhythmModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeRhythmModal()">×</span>
+        <h2>Todo está bien</h2>
+        <p>Respira por:</p>
+        <div id="rhythmTimer" class="fs-1 fw-bold">09:00</div>
+    </div>
+</div>
+
+
+<!-- 🌌 Sidebar del Manifiesto -->
+<div id="manifestSidebar" class="notes-sidebar hidden">
+    <div class="notes-header">
+        <span>🧘‍♀️ Manifiesto de Pausar</span>
+        <button class="close" onclick="closeManifestSidebar()">✕</button>
+    </div>
+    <div style="overflow-y: auto; flex: 1; font-size: 0.95rem; line-height: 1.6;">
+        <p><strong>Pausar es un acto radical.</strong> En un mundo que exige velocidad constante, detenerse es una decisión poderosa que reconecta con lo esencial.</p>
+        <p>En Serie9 creemos que cada pausa tiene un propósito: respirar, reflexionar, observar, crear. No es ocio, es intención.</p>
+        <p><strong>Esto no es solo una app, es un movimiento.</strong></p>
+
+        <a href="manifesto.html" class="manifesto-link" style="display: block; margin: 24px 0; padding: 14px; background-color: var(--primary-color); color: white; text-decoration: none; border-radius: 12px; text-align: center; font-weight: 500; transition: all 0.2s ease;">
+            <strong>📜 Manifiesto Completo</strong>
+        </a>
+        <a href="privacy.html" class="manifesto-link" style="display: block; margin: 16px 0 24px; padding: 14px; background-color: rgba(0, 0, 0, 0.05); color: var(--text-primary); text-decoration: none; border-radius: 12px; text-align: center; font-weight: 500; transition: all 0.2s ease; border: 1px solid var(--border-color);">
+            <strong>🔒 Términos de privacidad</strong>
+        </a>
+
+        <p>Gracias a todas las personas que apoyan este proyecto y hacen posible que más seres humanos se regalen el derecho de detenerse.</p>
+        <img src="https://contrib.rocks/image?repo=Astrolle/serie9" style=" margin-top: 16px;" />
+    </div>
+</div>
+
+<!-- 📅 Modal de Calendario tipo Heatmap -->
+<div id="calendarHeatmapModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeCalendarHeatmap()">×</span>
+        <h2>Tu Agenda Interna</h2>
+        <h3 id="calendarMonthTitle"></h3>
+        <p>Colores más oscuros indican más estrés acumulado ese día.</p>
+        <div id="calendarHeatmapGrid" class="heatmap-grid" style="grid-template-columns: repeat(7, 1fr);"></div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="./script.js"></script>
+<script src="./scripts/dreams.manager.js"></script>
+<script src="./scripts/daily.dream.js"></script>
+<script src="./scripts/tutorial.js"></script>
+<script src="./scripts/header.js"></script>
+<script src="./scripts/philosophical-enhancements.js"></script>
+<audio id="startSound" src="sounds/start-sound.mp3" preload="auto"></audio>
+<audio id="endSound" src="sounds/end-sound.mp3" preload="auto"></audio>
+
+<script>
+    // Llamar a esta función cuando se inicialice el header
+    document.addEventListener('DOMContentLoaded', () => {
+        updateHeaderWithLung();
+        initBreathingIndicator();
+        // O usa initAdvancedBreathing() para el patrón 4-7-8
+    });
+</script>
+</body>
+</html>
